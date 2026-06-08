@@ -261,6 +261,27 @@
         </div>
       </div>
 
+      <!-- A/B/C/E: Exportación local de la oferta editada -->
+      <div class="export card" aria-labelledby="export-title">
+        <h3 id="export-title" class="editor-title">Exportar oferta editada</h3>
+        <div class="sim-notice" role="note">
+          <strong>Exportación local.</strong> Copiar genera un texto para usar manualmente.
+          No envía mensajes, no abre WhatsApp, no publica y no guarda datos.
+        </div>
+
+        <div class="export-actions">
+          <button id="generate-export" class="btn-primary btn-apply" type="button">Generar texto comercial</button>
+          <button id="copy-export" class="btn-restore" type="button">Copiar texto</button>
+          <button id="print-export" class="btn-restore" type="button">Ver versión para imprimir</button>
+        </div>
+
+        <p id="export-status" class="export-status" role="status" hidden></p>
+
+        <label class="edit-label" for="export-text">Texto exportable (seleccionable)</label>
+        <textarea id="export-text" class="edit-field export-text" rows="14" readonly
+          aria-label="Texto comercial exportable (seleccionable para copiar manualmente)"></textarea>
+      </div>
+
       <!-- Cierre: frase madre como conclusión -->
       <div class="closing-claim">
         <p class="closing-text">De link genérico a oferta profesional con tu sello.</p>
