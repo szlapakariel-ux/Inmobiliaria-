@@ -320,80 +320,113 @@
       </div>
     </section>
 
-    <!-- ── MC-INMO-5K: Vista cliente (limpia, sin paneles internos) ─────── -->
-    <section id="client-view" class="moment-offer client-view" hidden aria-labelledby="cv-title">
+    <!-- ── MC-INMO-5K/5N: Vista cliente (rediseño Audaz, sin paneles internos) ── -->
+    <section id="client-view" class="moment-offer client-view client-view--audaz" hidden aria-labelledby="cv-title">
       <h2 id="cv-title" class="sr-only-title">Propuesta para el cliente</h2>
-      <p class="client-intro">Propuesta preparada para vos por <strong>Guadalupe Cabrera</strong> · <span class="brand-remax">RE/MAX Buró</span>.</p>
 
-      <div class="offer-card">
-        <div class="offer-topbar">
-          <div class="offer-brand">
-            <span class="offer-avatar" aria-hidden="true">GC</span>
-            <span class="offer-brand-text">
-              <strong>Guadalupe Cabrera</strong>
-              <span>Agente · <span class="brand-remax">RE/MAX Buró</span></span>
-            </span>
-          </div>
+      <article class="offer-card offer-card--audaz">
+
+        <!-- Banda RE/MAX tricolor -->
+        <div class="remax-band" aria-hidden="true">
+          <span></span><span></span><span></span>
         </div>
 
-        <!-- Galería placeholder (sin imágenes reales) -->
-        <div class="gallery" aria-label="Galería de la propiedad (placeholder)">
-          <div class="gallery-main placeholder-img">
-            <span class="placeholder-tag">Foto del inmueble (placeholder)</span>
+        <!-- Galería full-bleed con thumbs overlay y contador -->
+        <div class="gallery gallery--audaz" aria-label="Galería de la propiedad (placeholder)">
+          <div class="gallery-main placeholder-img" role="img" aria-label="Foto principal de la propiedad"></div>
+          <div class="gallery-overlay">
+            <div class="gallery-thumbs">
+              <div class="thumb placeholder-img" role="img" aria-label="Foto 2"></div>
+              <div class="thumb placeholder-img" role="img" aria-label="Foto 3"></div>
+              <div class="thumb placeholder-img" role="img" aria-label="Foto 4"></div>
+            </div>
           </div>
-          <div class="gallery-thumbs">
-            <div class="placeholder-img thumb"><span class="placeholder-tag">+</span></div>
-            <div class="placeholder-img thumb"><span class="placeholder-tag">+</span></div>
-            <div class="placeholder-img thumb"><span class="placeholder-tag">+</span></div>
-          </div>
+          <div class="gallery-count" aria-label="Fotos disponibles (placeholder)">📷 Fotos pendientes</div>
         </div>
 
-        <div class="offer-body">
+        <!-- Agent strip post-galería -->
+        <div class="offer-agent-strip">
+          <div class="offer-avatar" aria-hidden="true">GC</div>
+          <div class="offer-brand-text">
+            <div class="offer-brand-name">Guadalupe Cabrera</div>
+            <div class="offer-brand-sub"><span class="brand-remax">RE/MAX Buró</span></div>
+          </div>
+          <div class="offer-verified-badge" aria-label="Agente verificada (demo)">Agente verificada ✦</div>
+        </div>
+
+        <!-- Precio primero, prominente -->
+        <div class="offer-price-block">
+          <div class="offer-price">
+            <span class="offer-price-value" id="c-price">USD 118.000</span>
+            <span class="offer-price-note">precio de referencia</span>
+          </div>
           <div class="offer-tags">
             <span class="tag tag--op" id="c-op">Venta · USD 118.000</span>
             <span class="tag tag--zone" id="c-zone">Palermo, CABA</span>
           </div>
+        </div>
 
-          <h3 id="c-title" class="offer-title">Departamento 2 ambientes con balcón en Palermo</h3>
-          <p class="offer-price" id="c-price">USD 118.000 <span class="offer-price-note">precio de referencia</span></p>
+        <!-- Body -->
+        <div class="offer-body">
+
+          <h1 id="c-title" class="offer-title">Departamento 2 ambientes con balcón en Palermo</h1>
           <p class="offer-loc" id="c-loc">📍 Palermo, Ciudad Autónoma de Buenos Aires</p>
 
-          <div class="specs">
-            <div class="spec"><span class="spec-val" id="c-amb">2</span><span class="spec-key">ambientes</span></div>
-            <div class="spec"><span class="spec-val" id="c-sup">48 m²</span><span class="spec-key">superficie</span></div>
-            <div class="spec"><span class="spec-val" id="c-bath">1</span><span class="spec-key">baño</span></div>
+          <!-- Specs como pills horizontales -->
+          <div class="specs specs--pills" role="list" aria-label="Características de la propiedad">
+            <div class="spec" role="listitem">
+              <span class="spec-icon" aria-hidden="true">🏠</span>
+              <span class="spec-val"><span id="c-amb">2</span> amb.</span>
+            </div>
+            <div class="spec" role="listitem">
+              <span class="spec-icon" aria-hidden="true">📐</span>
+              <span class="spec-val" id="c-sup">48 m²</span>
+            </div>
+            <div class="spec" role="listitem">
+              <span class="spec-icon" aria-hidden="true">🚿</span>
+              <span class="spec-val"><span id="c-bath">1</span> baño</span>
+            </div>
           </div>
 
+          <!-- Descripción -->
           <div class="offer-section-block">
-            <p class="block-eyebrow">Descripción</p>
+            <div class="block-eyebrow">Descripción</div>
             <p class="offer-desc" id="c-desc"></p>
           </div>
 
+          <!-- Diferenciales -->
           <div class="offer-section-block">
-            <p class="block-eyebrow">Diferenciales</p>
-            <ul class="diffs">
+            <div class="block-eyebrow">Diferenciales</div>
+            <ul class="diffs" aria-label="Características destacadas">
               <li id="c-diff1"></li>
               <li id="c-diff2"></li>
               <li id="c-diff3"></li>
             </ul>
           </div>
 
-          <!-- CTA placeholder (href se mantiene como #contacto, sin WhatsApp real) -->
-          <a href="#contacto" class="btn-whatsapp" id="c-cta-link"><span aria-hidden="true">💬</span> <span id="c-cta">Consultar por WhatsApp</span></a>
+          <!-- CTA WhatsApp (placeholder, sin número real) -->
+          <a href="#contacto-cliente" class="btn-whatsapp" id="c-cta-link" aria-label="Consultar por WhatsApp (placeholder)">
+            <span aria-hidden="true">💬</span> <span id="c-cta">Consultar por WhatsApp</span>
+          </a>
           <p class="field-note field-note--center">CTA placeholder — sin número real, sin envío automático.</p>
 
-          <div class="trust-box">
-            <span class="trust-icon" aria-hidden="true">✓</span>
+          <!-- Trust box -->
+          <div class="trust-box" role="note">
+            <div class="trust-icon" aria-hidden="true">✓</div>
             <p><strong>Guadalupe te acompaña</strong> en todo el proceso: desde la consulta inicial hasta la visita.</p>
           </div>
 
-          <div class="contact-box" id="contacto-cliente">
-            <div class="contact-actions" aria-hidden="true">
-              <span class="contact-dot">✆</span><span class="contact-dot">☎</span><span class="contact-dot">✉</span>
-            </div>
+          <!-- Contact box horizontal -->
+          <div class="contact-box contact-box--audaz" id="contacto-cliente">
+            <div class="contact-avatar" aria-hidden="true">GC</div>
             <div class="contact-id">
               <strong>Guadalupe Cabrera</strong>
-              <span class="brand-remax">RE/MAX Buró</span>
+              <span><span class="brand-remax">RE/MAX Buró</span> · Agente</span>
+            </div>
+            <div class="contact-actions" aria-label="Contacto (placeholder)">
+              <span class="contact-dot" aria-hidden="true">📞</span>
+              <span class="contact-dot" aria-hidden="true">📧</span>
+              <span class="contact-dot" aria-hidden="true">🔗</span>
             </div>
           </div>
 
@@ -401,10 +434,11 @@
             Datos legales / matrícula: pendiente de carga autorizada.
             Demo con datos ficticios — no constituye una oferta comercial activa.
           </p>
+
         </div>
 
         <div class="offer-foot-flag">DEMO PÚBLICA — DATOS FICTICIOS — NO USAR COMERCIALMENTE</div>
-      </div>
+      </article>
     </section>
 
   </main>
