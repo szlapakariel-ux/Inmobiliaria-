@@ -568,11 +568,54 @@ code { font-family: "SFMono-Regular", Consolas, monospace; font-size: 0.85em; }
   overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
 }
 .client-intro {
-  max-width: 420px;
+  max-width: 560px;
   margin: 0 auto 14px;
   text-align: center;
-  font-size: 0.92rem;
+  font-size: clamp(0.9rem, 2.5vw, 1.02rem);
   color: var(--gc-muted);
 }
 /* En modo cliente, sin paneles internos: solo la pieza profesional limpia. */
 body.mode-client .site-footer { margin-top: 24px; }
+
+/* ── MC-INMO-5L: UX del link compartible ─────────────────────────────── */
+.client-actions { flex-wrap: wrap; }
+.client-warn { margin-top: 10px; }
+.client-link-details { margin-top: 12px; }
+.client-link-details > summary {
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--gc-muted);
+  padding: 4px 0;
+}
+.client-link-details[open] > summary { margin-bottom: 6px; }
+
+/* ── MC-INMO-5L: Vista cliente responsive (ancho fluido + tipografía) ─── */
+.client-view .offer-card {
+  max-width: min(680px, 100%);
+  width: 100%;
+}
+.client-view .gallery-main { height: clamp(190px, 34vw, 300px); }
+.client-view .offer-body { padding: 8px clamp(16px, 4vw, 28px) 4px; }
+.client-view .offer-tags { margin: 10px 0 12px; }
+.client-view .tag { font-size: clamp(0.74rem, 2vw, 0.84rem); }
+.client-view .offer-title { font-size: clamp(1.3rem, 4.6vw, 1.85rem); line-height: 1.22; }
+.client-view .offer-price { font-size: clamp(1.45rem, 5vw, 2.1rem); }
+.client-view .offer-loc { font-size: clamp(0.86rem, 2.4vw, 0.98rem); }
+.client-view .spec-val { font-size: clamp(1rem, 3vw, 1.2rem); }
+.client-view .spec-key { font-size: clamp(0.72rem, 2vw, 0.82rem); }
+.client-view .offer-desc,
+.client-view .diffs li { font-size: clamp(0.96rem, 2.5vw, 1.06rem); line-height: 1.55; }
+.client-view .btn-whatsapp {
+  font-size: clamp(1rem, 3vw, 1.14rem);
+  padding: clamp(14px, 2.6vw, 18px) 20px;
+  margin-top: 18px;
+}
+.client-view .legal-placeholder { font-size: clamp(0.72rem, 2vw, 0.8rem); }
+
+/* En pantallas amplias, la propuesta cliente respira y aprovecha el ancho. */
+@media (min-width: 720px) {
+  body.mode-client main { padding: 16px 24px 30px; }
+  .client-view { margin-top: 16px; }
+  .client-view .specs { gap: 12px; }
+}

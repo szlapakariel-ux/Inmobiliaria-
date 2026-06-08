@@ -4,8 +4,9 @@
  *  - valida el input localmente y hace eco del link recibido (no lo consulta);
  *  - orquesta la simulación visual LINK -> TRANSFORMACIÓN -> OFERTA;
  *  - permite editar localmente el texto comercial de la oferta demo;
- *  - 5K: genera un link compartible (datos en el #hash) que abre una vista
- *    cliente limpia, sin paneles internos de edición/transformación/export.
+ *  - 5K/5L: genera un link compartible (datos en el #hash, codificación compacta
+ *    URL-safe que omite los valores demo por defecto) que abre una vista cliente
+ *    limpia; con copiar y compartir nativo (Web Share API) si está disponible.
  *
  * IMPORTANTE: el link NO se consulta (sin fetch, scraping, APIs, navegación
  * automática ni descarga). La edición es 100% local en el navegador: NO usa IA
@@ -247,6 +248,7 @@
   var clientView = document.getElementById("client-view");
   var genClientBtn = document.getElementById("generate-client-link");
   var copyClientBtn = document.getElementById("copy-client-link");
+  var shareClientBtn = document.getElementById("share-client-link");
   var openClientBtn = document.getElementById("open-client-link");
   var clientLinkText = document.getElementById("client-link-text");
   var clientLinkStatus = document.getElementById("client-link-status");
@@ -255,52 +257,58 @@
     var s = document.querySelectorAll(".specs .spec")[i];
     return s ? txt(s.querySelector(".spec-val")) : "";
   }
-  // Reúne los datos visibles/editados de la oferta (para el link cliente).
-  function collectOfferData() {
+  // Mapa clave-corta -> id de la vista cliente (claves cortas = URL más liviana).
+  var CLIENT_MAP = {
+    t: "c-title", o: "c-op", z: "c-zone", p: "c-price", l: "c-loc",
+    a: "c-amb", s: "c-sup", b: "c-bath", d: "c-desc",
+    f1: "c-diff1", f2: "c-diff2", f3: "c-diff3", c: "c-cta"
+  };
+  // Snapshot de los valores demo por defecto (para omitir lo que no cambió).
+  var offerDefaults = null;
+  function collectFullOfferData() {
     return {
-      title: txt(offerFields.title),
-      op: txt(document.querySelector(".tag--op")),
-      zone: txt(document.querySelector(".tag--zone")),
-      price: txt(document.querySelector(".offer-price")),
-      loc: txt(document.querySelector(".offer-loc")),
-      amb: getSpec(0),
-      sup: getSpec(1),
-      bath: getSpec(2),
-      desc: txt(offerFields.desc),
-      diff1: txt(offerFields.diff1),
-      diff2: txt(offerFields.diff2),
-      diff3: txt(offerFields.diff3),
-      cta: txt(offerFields.cta)
+      t: txt(offerFields.title),
+      o: txt(document.querySelector(".tag--op")),
+      z: txt(document.querySelector(".tag--zone")),
+      p: txt(document.querySelector(".offer-price")),
+      l: txt(document.querySelector(".offer-loc")),
+      a: getSpec(0), s: getSpec(1), b: getSpec(2),
+      d: txt(offerFields.desc),
+      f1: txt(offerFields.diff1), f2: txt(offerFields.diff2), f3: txt(offerFields.diff3),
+      c: txt(offerFields.cta)
     };
   }
-  // Codificación segura unicode -> URI -> base64 (y su inversa).
-  function encodeData(obj) { return btoa(encodeURIComponent(JSON.stringify(obj))); }
+  // Solo se incluyen en el link los campos que difieren del demo por defecto.
+  function collectChangedData() {
+    var full = collectFullOfferData(), out = {};
+    Object.keys(full).forEach(function (k) {
+      if (!offerDefaults || full[k] !== offerDefaults[k]) { out[k] = full[k]; }
+    });
+    return out;
+  }
+  // Codificación compacta: JSON -> UTF-8 -> base64 URL-safe (sin %xx, +, /, =).
+  function encodeData(obj) {
+    var b64 = btoa(unescape(encodeURIComponent(JSON.stringify(obj))));
+    return b64.replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+  }
   function decodeData(payload) {
-    try { return JSON.parse(decodeURIComponent(atob(payload))); }
-    catch (e) { return null; }
+    try {
+      var b64 = payload.replace(/-/g, "+").replace(/_/g, "/");
+      return JSON.parse(decodeURIComponent(escape(atob(b64))));
+    } catch (e) { return null; }
   }
   function buildClientUrl() {
-    return location.origin + location.pathname + "#cliente=" + encodeData(collectOfferData());
+    return location.origin + location.pathname + "#cliente=" + encodeData(collectChangedData());
   }
   function setText(id, value) {
     var el = document.getElementById(id);
     if (el) { el.textContent = value || ""; }
   }
-  // Rellena la vista cliente con los datos decodificados del hash.
+  // Rellena la vista cliente; los campos ausentes conservan el demo por defecto.
   function fillClientView(d) {
-    setText("c-title", d.title);
-    setText("c-op", d.op);
-    setText("c-zone", d.zone);
-    setText("c-price", d.price);
-    setText("c-loc", d.loc);
-    setText("c-amb", d.amb);
-    setText("c-sup", d.sup);
-    setText("c-bath", d.bath);
-    setText("c-desc", d.desc);
-    setText("c-diff1", d.diff1);
-    setText("c-diff2", d.diff2);
-    setText("c-diff3", d.diff3);
-    setText("c-cta", d.cta);
+    Object.keys(CLIENT_MAP).forEach(function (k) {
+      if (Object.prototype.hasOwnProperty.call(d, k)) { setText(CLIENT_MAP[k], d[k]); }
+    });
     // Diferenciales vacíos: ocultar el <li> para no dejar viñetas sueltas.
     ["c-diff1", "c-diff2", "c-diff3"].forEach(function (id) {
       var el = document.getElementById(id);
@@ -331,7 +339,19 @@
   }
   function generateClientLink() {
     if (clientLinkText) { clientLinkText.value = buildClientUrl(); }
-    setClientStatus("Link generado. Copialo y compartilo, o abrí la vista cliente.");
+    setClientStatus("Link cliente listo para compartir.");
+  }
+  // Compartir nativo (Web Share API) si el navegador lo soporta; si no, copiar.
+  function shareClientLink() {
+    var url = buildClientUrl();
+    if (clientLinkText) { clientLinkText.value = url; }
+    if (navigator.share) {
+      navigator.share({ title: "Propuesta — Guadalupe Cabrera (demo)", url: url })
+        .then(function () { setClientStatus("Link compartido."); })
+        .catch(function () { setClientStatus("No se completó el compartir. Podés copiar el link."); });
+    } else {
+      copyClientLink();
+    }
   }
   function copyClientLink() {
     if (!clientLinkText) { return; }
@@ -359,6 +379,9 @@
   /* ── Wiring ──────────────────────────────────────────────────────────── */
   captureDemoDefaults();
   fillEditorFrom(demoText);
+  offerDefaults = collectFullOfferData(); // snapshot demo (para omitir defaults)
+  // Mostrar "Compartir" solo si el navegador soporta Web Share API.
+  if (shareClientBtn && navigator.share) { shareClientBtn.hidden = false; }
 
   if (btn) { btn.addEventListener("click", startTransformation); }
   if (input) { input.addEventListener("input", clearError); }
@@ -370,6 +393,7 @@
 
   if (genClientBtn) { genClientBtn.addEventListener("click", generateClientLink); }
   if (copyClientBtn) { copyClientBtn.addEventListener("click", copyClientLink); }
+  if (shareClientBtn) { shareClientBtn.addEventListener("click", shareClientLink); }
   if (openClientBtn) { openClientBtn.addEventListener("click", openClientLink); }
   window.addEventListener("hashchange", initFromHash);
 
