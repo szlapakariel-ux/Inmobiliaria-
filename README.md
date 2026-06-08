@@ -25,8 +25,22 @@ No requiere instalación, servidor ni build. Basta con abrir el archivo
 
 1. Cloná o descargá este repositorio.
 2. Hacé doble clic en `index.html` (o abrilo con tu navegador).
-3. Pegá/usá el link ficticio precargado y presioná **"Transformar en oferta profesional"**.
+3. En el bloque inicial, **pegá o editá un link** genérico (viene precargado uno
+   ficticio de ejemplo) y presioná **"Transformar en oferta profesional"**.
 4. Observá los estados simulados y la oferta final generada.
+
+### Prueba con link genérico
+
+El campo de link es **editable**: podés reemplazar el ejemplo por cualquier link
+genérico (como texto) y simular el flujo.
+
+- **El link no se consulta.** Esta demo no hace fetch, scraping, ni navegación
+  automática, ni descarga imágenes, ni extrae datos reales. Solo simula la
+  transformación localmente.
+- Si el campo está vacío, la demo pide *"Pegá un link para iniciar la simulación."*
+- Si el texto no parece un link, pide *"Para esta demo, ingresá un link de ejemplo."*
+- La oferta final **siempre usa los datos ficticios** ya definidos: no cambia por
+  el link ingresado.
 
 ## Qué es y qué NO es
 

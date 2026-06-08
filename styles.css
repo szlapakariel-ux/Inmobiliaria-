@@ -196,6 +196,43 @@ main {
 
 .field-note { margin: 8px 0 0; font-size: 0.8rem; color: var(--gc-faint); }
 .field-note--center { text-align: center; }
+
+/* F: validación mínima del input */
+.link-input--error { color: var(--gc-red); }
+.link-error {
+  margin: 8px 0 0;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--gc-red);
+}
+
+/* C: eco del link recibido (no consultado) */
+.link-received {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px;
+  margin: 0 0 14px;
+  padding: 10px 12px;
+  background: #faf8f4;
+  border: 1px solid var(--gc-line);
+  border-radius: 8px;
+  font-size: 0.82rem;
+}
+.lr-label {
+  font-weight: 700;
+  color: var(--gc-ink);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 0.72rem;
+}
+.lr-value {
+  font-family: "SFMono-Regular", Consolas, monospace;
+  color: var(--gc-muted);
+  word-break: break-all;
+  flex: 1 1 100%;
+}
+.lr-note { color: var(--gc-faint); font-style: italic; }
 code { font-family: "SFMono-Regular", Consolas, monospace; font-size: 0.85em; }
 
 /* ── Botón ───────────────────────────────────────────────────────────── */
