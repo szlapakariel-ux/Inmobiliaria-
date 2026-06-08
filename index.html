@@ -282,10 +282,122 @@
           aria-label="Texto comercial exportable (seleccionable para copiar manualmente)"></textarea>
       </div>
 
+      <!-- MC-INMO-5K: Generar link para cliente (hash local, sin backend) -->
+      <div class="export card client-gen" aria-labelledby="client-gen-title">
+        <h3 id="client-gen-title" class="editor-title">Generar link para cliente</h3>
+        <div class="sim-notice" role="note">
+          <strong>Link de demo local.</strong> Los textos editados viajan dentro de la
+          propia URL (en el #hash). No hay backend, base de datos ni guardado.
+        </div>
+        <p class="field-note field-note--warn">
+          Este link de demo incluye los textos editados dentro de la URL. No cargues
+          datos reales, privados o sensibles. Demo pública con datos ficticios — no usar comercialmente.
+        </p>
+
+        <div class="export-actions">
+          <button id="generate-client-link" class="btn-primary btn-apply" type="button">Generar link para cliente</button>
+          <button id="copy-client-link" class="btn-restore" type="button">Copiar link</button>
+          <button id="open-client-link" class="btn-restore" type="button">Abrir vista cliente</button>
+        </div>
+
+        <p id="client-link-status" class="export-status" role="status" hidden></p>
+
+        <label class="edit-label" for="client-link-text">Link para cliente (seleccionable)</label>
+        <textarea id="client-link-text" class="edit-field export-text" rows="3" readonly
+          aria-label="Link de demo para el cliente (seleccionable para copiar manualmente)"></textarea>
+      </div>
+
       <!-- Cierre: frase madre como conclusión -->
       <div class="closing-claim">
         <p class="closing-text">De link genérico a oferta profesional con tu sello.</p>
         <p class="closing-sub">Eso es exactamente lo que acabás de ver.</p>
+      </div>
+    </section>
+
+    <!-- ── MC-INMO-5K: Vista cliente (limpia, sin paneles internos) ─────── -->
+    <section id="client-view" class="moment-offer client-view" hidden aria-labelledby="cv-title">
+      <h2 id="cv-title" class="sr-only-title">Propuesta para el cliente</h2>
+      <p class="client-intro">Propuesta preparada para vos por <strong>Guadalupe Cabrera</strong> · <span class="brand-remax">RE/MAX Buró</span>.</p>
+
+      <div class="offer-card">
+        <div class="offer-topbar">
+          <div class="offer-brand">
+            <span class="offer-avatar" aria-hidden="true">GC</span>
+            <span class="offer-brand-text">
+              <strong>Guadalupe Cabrera</strong>
+              <span>Agente · <span class="brand-remax">RE/MAX Buró</span></span>
+            </span>
+          </div>
+        </div>
+
+        <!-- Galería placeholder (sin imágenes reales) -->
+        <div class="gallery" aria-label="Galería de la propiedad (placeholder)">
+          <div class="gallery-main placeholder-img">
+            <span class="placeholder-tag">Foto del inmueble (placeholder)</span>
+          </div>
+          <div class="gallery-thumbs">
+            <div class="placeholder-img thumb"><span class="placeholder-tag">+</span></div>
+            <div class="placeholder-img thumb"><span class="placeholder-tag">+</span></div>
+            <div class="placeholder-img thumb"><span class="placeholder-tag">+</span></div>
+          </div>
+        </div>
+
+        <div class="offer-body">
+          <div class="offer-tags">
+            <span class="tag tag--op" id="c-op">Venta · USD 118.000</span>
+            <span class="tag tag--zone" id="c-zone">Palermo, CABA</span>
+          </div>
+
+          <h3 id="c-title" class="offer-title">Departamento 2 ambientes con balcón en Palermo</h3>
+          <p class="offer-price" id="c-price">USD 118.000 <span class="offer-price-note">precio de referencia</span></p>
+          <p class="offer-loc" id="c-loc">📍 Palermo, Ciudad Autónoma de Buenos Aires</p>
+
+          <div class="specs">
+            <div class="spec"><span class="spec-val" id="c-amb">2</span><span class="spec-key">ambientes</span></div>
+            <div class="spec"><span class="spec-val" id="c-sup">48 m²</span><span class="spec-key">superficie</span></div>
+            <div class="spec"><span class="spec-val" id="c-bath">1</span><span class="spec-key">baño</span></div>
+          </div>
+
+          <div class="offer-section-block">
+            <p class="block-eyebrow">Descripción</p>
+            <p class="offer-desc" id="c-desc"></p>
+          </div>
+
+          <div class="offer-section-block">
+            <p class="block-eyebrow">Diferenciales</p>
+            <ul class="diffs">
+              <li id="c-diff1"></li>
+              <li id="c-diff2"></li>
+              <li id="c-diff3"></li>
+            </ul>
+          </div>
+
+          <!-- CTA placeholder (href se mantiene como #contacto, sin WhatsApp real) -->
+          <a href="#contacto" class="btn-whatsapp" id="c-cta-link"><span aria-hidden="true">💬</span> <span id="c-cta">Consultar por WhatsApp</span></a>
+          <p class="field-note field-note--center">CTA placeholder — sin número real, sin envío automático.</p>
+
+          <div class="trust-box">
+            <span class="trust-icon" aria-hidden="true">✓</span>
+            <p><strong>Guadalupe te acompaña</strong> en todo el proceso: desde la consulta inicial hasta la visita.</p>
+          </div>
+
+          <div class="contact-box" id="contacto-cliente">
+            <div class="contact-actions" aria-hidden="true">
+              <span class="contact-dot">✆</span><span class="contact-dot">☎</span><span class="contact-dot">✉</span>
+            </div>
+            <div class="contact-id">
+              <strong>Guadalupe Cabrera</strong>
+              <span class="brand-remax">RE/MAX Buró</span>
+            </div>
+          </div>
+
+          <p class="legal-placeholder">
+            Datos legales / matrícula: pendiente de carga autorizada.
+            Demo con datos ficticios — no constituye una oferta comercial activa.
+          </p>
+        </div>
+
+        <div class="offer-foot-flag">DEMO PÚBLICA — DATOS FICTICIOS — NO USAR COMERCIALMENTE</div>
       </div>
     </section>
 
@@ -296,7 +408,7 @@
     <p>Pieza de presentación — demo. Datos ficticios con fines de demostración. No constituye una oferta comercial activa ni una publicación.</p>
     <p class="footer-note">
       No reproduce isologotipos de terceros; las marcas mencionadas pertenecen a sus titulares.
-      Sin deploy, sin backend, sin datos reales, sin imágenes de terceros.
+      Sin backend, sin base de datos, sin datos reales, sin imágenes de terceros.
     </p>
     <p class="footer-claim">tu publicación, con tu sello</p>
   </footer>
