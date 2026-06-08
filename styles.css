@@ -641,3 +641,451 @@ body.mode-client .site-footer { margin-top: 24px; }
   .client-view { margin-top: 16px; }
   .client-view .specs { gap: 12px; }
 }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   MC-INMO-5N — Rediseño "Audaz" de la vista cliente
+   Layout mobile-first basado en el handoff de Claude Design.
+   Scoped a .client-view--audaz para no afectar la vista Guadalupe.
+═══════════════════════════════════════════════════════════════════════════ */
+
+.client-view--audaz {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 16px;
+  gap: 0;
+}
+
+.client-view--audaz .offer-card {
+  width: 100%;
+  max-width: 460px;
+  margin: 0 auto;
+  background: var(--gc-card);
+  border: 1px solid var(--gc-line);
+  border-radius: 22px;
+  box-shadow: 0 14px 40px rgba(29, 35, 48, 0.14);
+  overflow: hidden;
+  padding: 0;
+}
+
+/* Banda RE/MAX tricolor */
+.client-view--audaz .remax-band {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  height: 5px;
+}
+.client-view--audaz .remax-band span:nth-child(1) { background: var(--gc-red); }
+.client-view--audaz .remax-band span:nth-child(2) { background: #fff; }
+.client-view--audaz .remax-band span:nth-child(3) { background: var(--gc-blue); }
+
+/* Galería full-bleed con thumbs overlay */
+.client-view--audaz .gallery {
+  position: relative;
+  padding: 0;
+}
+.client-view--audaz .gallery-main {
+  display: block;
+  width: 100%;
+  height: 230px;
+  margin: 0;
+  background: #ccc9bf;
+  border: none;
+  border-radius: 0;
+  overflow: hidden;
+  position: relative;
+}
+.client-view--audaz .gallery-main.placeholder-img {
+  background: repeating-linear-gradient(45deg, #ece6db, #ece6db 14px, #e3dccd 14px, #e3dccd 28px);
+}
+.client-view--audaz .gallery-main.placeholder-img::after {
+  content: "📷";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  opacity: 0.45;
+}
+.client-view--audaz .gallery-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0 10px 8px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.46));
+}
+.client-view--audaz .gallery-thumbs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5px;
+  padding: 0;
+}
+.client-view--audaz .gallery-thumbs .thumb {
+  height: 50px;
+  border-radius: 7px;
+  background: rgba(184, 181, 172, 0.85);
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  overflow: hidden;
+}
+.client-view--audaz .gallery-thumbs .thumb.placeholder-img::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.12);
+}
+.client-view--audaz .gallery-count {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 999px;
+  pointer-events: none;
+  letter-spacing: 0.02em;
+}
+
+/* Agent strip post-galería */
+.client-view--audaz .offer-agent-strip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 16px;
+  border-bottom: 1px solid var(--gc-line);
+}
+.client-view--audaz .offer-agent-strip .offer-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--gc-ink);
+  color: #fff;
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 0.82rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  letter-spacing: 0.03em;
+}
+.client-view--audaz .offer-brand-text {
+  flex: 1;
+  min-width: 0;
+  display: block;
+}
+.client-view--audaz .offer-brand-name {
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--gc-ink);
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.client-view--audaz .offer-brand-sub {
+  font-size: 11px;
+  color: var(--gc-muted);
+}
+.client-view--audaz .offer-verified-badge {
+  background: var(--gc-accent-soft);
+  border: 1px solid var(--gc-accent);
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--gc-accent);
+  white-space: nowrap;
+  flex-shrink: 0;
+  letter-spacing: 0.03em;
+}
+
+/* Precio primero, prominente */
+.client-view--audaz .offer-price-block {
+  padding: 18px 18px 14px;
+  border-bottom: 1px solid var(--gc-line);
+}
+.client-view--audaz .offer-price {
+  font-family: var(--serif);
+  font-size: 2.1rem;
+  font-weight: 800;
+  color: var(--gc-ink);
+  line-height: 1.05;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px;
+}
+.client-view--audaz .offer-price-value { display: inline; }
+.client-view--audaz .offer-price-note {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--gc-muted);
+  letter-spacing: 0.01em;
+}
+.client-view--audaz .offer-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 10px 0 0;
+}
+.client-view--audaz .tag {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 999px;
+  letter-spacing: 0.02em;
+}
+.client-view--audaz .tag--op { background: var(--gc-blue); color: #fff; }
+.client-view--audaz .tag--zone { background: #eee9e0; color: var(--gc-muted); }
+
+/* Body principal */
+.client-view--audaz .offer-body {
+  padding: 16px 18px 0;
+}
+.client-view--audaz .offer-title {
+  font-family: var(--serif);
+  font-size: 1.22rem;
+  font-weight: 600;
+  line-height: 1.26;
+  margin: 0 0 8px;
+  color: var(--gc-ink);
+  text-wrap: pretty;
+}
+.client-view--audaz .offer-loc {
+  font-size: 13px;
+  color: var(--gc-muted);
+  margin: 0 0 16px;
+}
+
+/* Specs como pills horizontales (icono + valor) */
+.client-view--audaz .specs--pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 0 0 18px;
+  padding: 0;
+  list-style: none;
+}
+.client-view--audaz .specs--pills .spec {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: #faf8f4;
+  border: 1px solid var(--gc-line);
+  border-radius: 999px;
+  padding: 8px 14px;
+  flex: 1 1 0;
+  text-align: center;
+}
+.client-view--audaz .specs--pills .spec-icon {
+  font-size: 14px;
+  line-height: 1;
+}
+.client-view--audaz .specs--pills .spec-val {
+  display: inline;
+  font-weight: 700;
+  font-size: 12px;
+  color: var(--gc-ink);
+  margin: 0;
+}
+
+/* Secciones internas */
+.client-view--audaz .offer-section-block { margin: 0 0 18px; }
+.client-view--audaz .block-eyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gc-faint);
+  margin: 0 0 7px;
+}
+.client-view--audaz .offer-desc {
+  margin: 0;
+  color: #3a4150;
+  font-size: 14px;
+  line-height: 1.62;
+}
+
+/* Diferenciales — grid 2 columnas con check rojo */
+.client-view--audaz .diffs {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px 14px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.client-view--audaz .diffs li {
+  font-size: 13px;
+  color: #3a4150;
+  padding-left: 20px;
+  position: relative;
+  line-height: 1.45;
+}
+.client-view--audaz .diffs li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--gc-red);
+  font-weight: 700;
+}
+
+/* CTA WhatsApp */
+.client-view--audaz .btn-whatsapp {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+  background: var(--gc-green);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  text-align: center;
+  padding: 17px 20px;
+  border-radius: 13px;
+  font-size: 16px;
+  letter-spacing: 0.015em;
+}
+
+/* Trust box */
+.client-view--audaz .trust-box {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  background: var(--gc-sim-bg);
+  border: 1px solid var(--gc-sim-border);
+  border-radius: 10px;
+  padding: 11px 13px;
+  margin: 14px 0;
+}
+.client-view--audaz .trust-icon {
+  flex: 0 0 auto;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--gc-blue);
+  color: #fff;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.client-view--audaz .trust-box p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--gc-sim-ink);
+  line-height: 1.45;
+}
+
+/* Contact box horizontal */
+.client-view--audaz .contact-box--audaz {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 14px;
+  margin: 0 0 12px;
+  border: 1px solid var(--gc-line);
+  border-radius: 12px;
+  background: #faf8f4;
+  flex-wrap: nowrap;
+}
+.client-view--audaz .contact-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--gc-ink);
+  color: #fff;
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.client-view--audaz .contact-id {
+  flex: 1;
+  min-width: 0;
+  display: block;
+  text-align: left;
+}
+.client-view--audaz .contact-id strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--gc-ink);
+  line-height: 1.2;
+}
+.client-view--audaz .contact-id span {
+  font-size: 11px;
+  color: var(--gc-muted);
+}
+.client-view--audaz .contact-actions {
+  display: flex;
+  gap: 7px;
+}
+.client-view--audaz .contact-dot {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--gc-line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: inherit;
+}
+
+.client-view--audaz .legal-placeholder {
+  margin: 6px 0 0;
+  font-size: 11px;
+  color: var(--gc-faint);
+  font-style: italic;
+  text-align: center;
+  line-height: 1.45;
+}
+
+.client-view--audaz .offer-foot-flag {
+  margin-top: 16px;
+  background: var(--gc-warn-bg);
+  color: var(--gc-warn-ink);
+  text-align: center;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 8px;
+  border-top: 1px solid #e7d9a8;
+}
+
+/* Pantallas chicas: ajustes finos del diseño Audaz */
+@media (max-width: 390px) {
+  .client-view--audaz .offer-price { font-size: 1.85rem; }
+  .client-view--audaz .specs--pills { gap: 5px; }
+  .client-view--audaz .specs--pills .spec { padding: 7px 10px; }
+  .client-view--audaz .specs--pills .spec-val { font-size: 11px; }
+  .client-view--audaz .diffs { gap: 7px 10px; }
+  .client-view--audaz .diffs li { font-size: 12px; }
+  .client-view--audaz .offer-desc { font-size: 13px; }
+  .client-view--audaz .btn-whatsapp { font-size: 15px; padding: 15px 18px; }
+  .client-view--audaz .offer-verified-badge { display: none; }
+}
+
+/* En desktop: el feed cliente respira pero la pieza mantiene su escala. */
+@media (min-width: 720px) {
+  .client-view--audaz { padding: 28px 24px; }
+  .client-view--audaz .offer-card { max-width: 480px; }
+}
+
+/* En modo cliente Audaz, no usar la grilla mobile heredada para .diffs. */
+body.mode-client .client-view--audaz .diffs { grid-template-columns: repeat(2, 1fr); }
+body.mode-client .client-view--audaz .contact-box--audaz { flex-wrap: nowrap; }
+body.mode-client main:has(.client-view--audaz) { padding: 0; max-width: 100%; }

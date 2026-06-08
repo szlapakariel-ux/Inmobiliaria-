@@ -257,6 +257,16 @@
     var s = document.querySelectorAll(".specs .spec")[i];
     return s ? txt(s.querySelector(".spec-val")) : "";
   }
+  // Extrae solo el valor del precio (sin la nota "precio de referencia")
+  // para que el rediseño 5N pueda renderizar valor y nota por separado.
+  function txtPriceValue() {
+    var el = document.querySelector("#offer-section .offer-price");
+    if (!el) { return ""; }
+    var clone = el.cloneNode(true);
+    var note = clone.querySelector(".offer-price-note");
+    if (note) { note.parentNode.removeChild(note); }
+    return clone.textContent.trim().replace(/\s+/g, " ");
+  }
   // Mapa clave-corta -> id de la vista cliente (claves cortas = URL más liviana).
   var CLIENT_MAP = {
     t: "c-title", o: "c-op", z: "c-zone", p: "c-price", l: "c-loc",
@@ -270,7 +280,7 @@
       t: txt(offerFields.title),
       o: txt(document.querySelector(".tag--op")),
       z: txt(document.querySelector(".tag--zone")),
-      p: txt(document.querySelector(".offer-price")),
+      p: txtPriceValue(),
       l: txt(document.querySelector(".offer-loc")),
       a: getSpec(0), s: getSpec(1), b: getSpec(2),
       d: txt(offerFields.desc),
