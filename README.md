@@ -85,6 +85,32 @@ los datos visibles/editados:
 Copiar/exportar **no envía ni publica nada**: no abre WhatsApp, no usa WhatsApp
 real, no hay backend, scraping, IA real ni guardado. Todo es local y manual.
 
+### Generar un link para cliente (vista cliente)
+
+La demo tiene **dos vistas**:
+
+- **Vista Guadalupe / edición:** la pantalla completa (pegar link, transformación,
+  edición, exportación) — la de trabajo.
+- **Vista cliente:** muestra **solo la oferta profesional limpia**, sin los paneles
+  internos de edición/transformación/exportación.
+
+El bloque **"Generar link para cliente"** crea un link compartible de demo:
+
+- **"Generar link para cliente"** arma una URL con los textos visibles/editados.
+- **"Copiar link"** copia ese link (o queda seleccionable para copiar manual).
+- **"Abrir vista cliente"** abre la vista limpia en esta misma pestaña.
+
+Al abrir ese link, se ve únicamente la pieza profesional (sin controles internos).
+
+**Sin backend ni base de datos:** los textos viajan **dentro de la propia URL**, en
+el fragmento `#hash` (codificados localmente con `encodeURIComponent` + `btoa`). No
+se guarda nada (sin `localStorage`, sin cookies, sin servidor), no hay `fetch`, API,
+scraping ni IA real, y no se publica automáticamente en ningún otro lado.
+
+> ⚠️ **El link de demo incluye los textos editados dentro de la URL. No cargues
+> datos reales, privados o sensibles.** Demo pública con datos ficticios — no usar
+> comercialmente.
+
 ## Qué es y qué NO es
 
 Esta demo:

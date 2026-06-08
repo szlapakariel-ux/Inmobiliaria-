@@ -1,9 +1,11 @@
 /*
- * MC-INMO-5G — Demo estática con prueba de link y edición local del texto.
+ * MC-INMO-5G/5K — Demo estática: prueba de link, edición local y vista cliente.
  * JavaScript mínimo:
  *  - valida el input localmente y hace eco del link recibido (no lo consulta);
  *  - orquesta la simulación visual LINK -> TRANSFORMACIÓN -> OFERTA;
- *  - permite editar localmente el texto comercial de la oferta demo.
+ *  - permite editar localmente el texto comercial de la oferta demo;
+ *  - 5K: genera un link compartible (datos en el #hash) que abre una vista
+ *    cliente limpia, sin paneles internos de edición/transformación/export.
  *
  * IMPORTANTE: el link NO se consulta (sin fetch, scraping, APIs, navegación
  * automática ni descarga). La edición es 100% local en el navegador: NO usa IA
@@ -239,6 +241,121 @@
     window.print(); // vista de impresión nativa del navegador, sin guardar ni enviar.
   }
 
+  /* ── MC-INMO-5K: Vista cliente + link compartible (hash local) ───────── */
+  // El link cliente embebe los textos en el #hash de la URL. SIN backend, base
+  // de datos, localStorage, cookies, fetch ni API: todo viaja en la propia URL.
+  var clientView = document.getElementById("client-view");
+  var genClientBtn = document.getElementById("generate-client-link");
+  var copyClientBtn = document.getElementById("copy-client-link");
+  var openClientBtn = document.getElementById("open-client-link");
+  var clientLinkText = document.getElementById("client-link-text");
+  var clientLinkStatus = document.getElementById("client-link-status");
+
+  function getSpec(i) {
+    var s = document.querySelectorAll(".specs .spec")[i];
+    return s ? txt(s.querySelector(".spec-val")) : "";
+  }
+  // Reúne los datos visibles/editados de la oferta (para el link cliente).
+  function collectOfferData() {
+    return {
+      title: txt(offerFields.title),
+      op: txt(document.querySelector(".tag--op")),
+      zone: txt(document.querySelector(".tag--zone")),
+      price: txt(document.querySelector(".offer-price")),
+      loc: txt(document.querySelector(".offer-loc")),
+      amb: getSpec(0),
+      sup: getSpec(1),
+      bath: getSpec(2),
+      desc: txt(offerFields.desc),
+      diff1: txt(offerFields.diff1),
+      diff2: txt(offerFields.diff2),
+      diff3: txt(offerFields.diff3),
+      cta: txt(offerFields.cta)
+    };
+  }
+  // Codificación segura unicode -> URI -> base64 (y su inversa).
+  function encodeData(obj) { return btoa(encodeURIComponent(JSON.stringify(obj))); }
+  function decodeData(payload) {
+    try { return JSON.parse(decodeURIComponent(atob(payload))); }
+    catch (e) { return null; }
+  }
+  function buildClientUrl() {
+    return location.origin + location.pathname + "#cliente=" + encodeData(collectOfferData());
+  }
+  function setText(id, value) {
+    var el = document.getElementById(id);
+    if (el) { el.textContent = value || ""; }
+  }
+  // Rellena la vista cliente con los datos decodificados del hash.
+  function fillClientView(d) {
+    setText("c-title", d.title);
+    setText("c-op", d.op);
+    setText("c-zone", d.zone);
+    setText("c-price", d.price);
+    setText("c-loc", d.loc);
+    setText("c-amb", d.amb);
+    setText("c-sup", d.sup);
+    setText("c-bath", d.bath);
+    setText("c-desc", d.desc);
+    setText("c-diff1", d.diff1);
+    setText("c-diff2", d.diff2);
+    setText("c-diff3", d.diff3);
+    setText("c-cta", d.cta);
+    // Diferenciales vacíos: ocultar el <li> para no dejar viñetas sueltas.
+    ["c-diff1", "c-diff2", "c-diff3"].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) { el.hidden = (el.textContent.trim() === ""); }
+    });
+  }
+  // En modo cliente se ocultan todos los paneles internos de la vista Guadalupe.
+  function showClientMode() {
+    document.body.classList.add("mode-client");
+    var hide = document.querySelectorAll(".concept, .moment, #process-section, #offer-section");
+    Array.prototype.forEach.call(hide, function (el) { el.hidden = true; });
+    if (clientView) { clientView.hidden = false; }
+  }
+  // Si la URL trae #cliente=…, mostrar solo la vista cliente.
+  function initFromHash() {
+    var m = (window.location.hash || "").match(/^#cliente=(.+)$/);
+    if (!m) { return; }
+    var data = decodeData(m[1]);
+    if (!data) { return; }
+    fillClientView(data);
+    showClientMode();
+    window.scrollTo(0, 0);
+  }
+  function setClientStatus(msg) {
+    if (!clientLinkStatus) { return; }
+    clientLinkStatus.textContent = msg;
+    clientLinkStatus.hidden = false;
+  }
+  function generateClientLink() {
+    if (clientLinkText) { clientLinkText.value = buildClientUrl(); }
+    setClientStatus("Link generado. Copialo y compartilo, o abrí la vista cliente.");
+  }
+  function copyClientLink() {
+    if (!clientLinkText) { return; }
+    if (!clientLinkText.value) { clientLinkText.value = buildClientUrl(); }
+    clientLinkText.focus();
+    clientLinkText.select();
+    try { clientLinkText.setSelectionRange(0, clientLinkText.value.length); } catch (e) {}
+    var copied = false;
+    try { copied = document.execCommand("copy"); } catch (e) { copied = false; }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      try { navigator.clipboard.writeText(clientLinkText.value); copied = true; } catch (e) {}
+    }
+    setClientStatus(copied
+      ? "Link copiado al portapapeles."
+      : "Seleccioná el link del recuadro y copialo manualmente (Ctrl/Cmd+C).");
+  }
+  function openClientLink() {
+    var url = buildClientUrl();
+    if (clientLinkText) { clientLinkText.value = url; }
+    // Navegación same-origin por hash (no abre ventanas ni recursos externos).
+    window.location.href = url;
+    initFromHash();
+  }
+
   /* ── Wiring ──────────────────────────────────────────────────────────── */
   captureDemoDefaults();
   fillEditorFrom(demoText);
@@ -250,4 +367,12 @@
   if (generateBtn) { generateBtn.addEventListener("click", generateExport); }
   if (copyBtn) { copyBtn.addEventListener("click", copyExport); }
   if (printBtn) { printBtn.addEventListener("click", printExport); }
+
+  if (genClientBtn) { genClientBtn.addEventListener("click", generateClientLink); }
+  if (copyClientBtn) { copyClientBtn.addEventListener("click", copyClientLink); }
+  if (openClientBtn) { openClientBtn.addEventListener("click", openClientLink); }
+  window.addEventListener("hashchange", initFromHash);
+
+  // Si se abrió directamente un link de cliente, mostrar solo la vista cliente.
+  initFromHash();
 })();
