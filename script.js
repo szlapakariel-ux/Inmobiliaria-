@@ -45,6 +45,13 @@
   var restoreBtn = document.getElementById("restore-demo");
   var editNotice = document.getElementById("edit-notice");
 
+  // Exportación local (solo navegador: copiar / imprimir, sin envío ni guardado).
+  var generateBtn = document.getElementById("generate-export");
+  var copyBtn = document.getElementById("copy-export");
+  var printBtn = document.getElementById("print-export");
+  var exportText = document.getElementById("export-text");
+  var exportStatus = document.getElementById("export-status");
+
   // Textos demo originales (única fuente de verdad, en memoria).
   var demoText = {};
   function captureDemoDefaults() {
@@ -156,6 +163,82 @@
     if (editNotice) { editNotice.hidden = true; editNotice.textContent = ""; }
   }
 
+  /* ── Exportación local del texto comercial ───────────────────────────── */
+  function txt(el) {
+    return el ? el.textContent.trim().replace(/\s+/g, " ") : "";
+  }
+  // Arma el texto a partir de los datos visibles/editados de la oferta demo.
+  function buildExportText() {
+    var op = txt(document.querySelector(".tag--op"));
+    var zone = txt(document.querySelector(".tag--zone"));
+    var price = txt(document.querySelector(".offer-price"));
+    var loc = txt(document.querySelector(".offer-loc")).replace(/^📍\s*/, "");
+    var specs = Array.prototype.map.call(
+      document.querySelectorAll(".spec"),
+      function (s) {
+        return (txt(s.querySelector(".spec-val")) + " " + txt(s.querySelector(".spec-key"))).trim();
+      }
+    );
+    var diffs = [offerFields.diff1, offerFields.diff2, offerFields.diff3]
+      .map(txt)
+      .filter(function (d) { return d !== ""; });
+
+    var L = [];
+    L.push("DEMO — datos ficticios, no publicar.");
+    L.push("");
+    L.push(txt(offerFields.title));
+    L.push([op, zone].filter(Boolean).join(" · "));
+    if (price) { L.push(price); }
+    if (loc) { L.push(loc); }
+    L.push("");
+    if (specs.length) { L.push("Datos clave: " + specs.join(" · ")); L.push(""); }
+    L.push("Descripción:");
+    L.push(txt(offerFields.desc));
+    L.push("");
+    if (diffs.length) {
+      L.push("Diferenciales:");
+      diffs.forEach(function (d) { L.push("- " + d); });
+      L.push("");
+    }
+    L.push("Contacto (demo): " + txt(offerFields.cta) + " — placeholder, sin número real.");
+    L.push("Oferta presentada por Guadalupe Cabrera · RE/MAX Buró.");
+    L.push("");
+    L.push("DEMO — datos ficticios, no publicar.");
+    return L.join("\n");
+  }
+  function setExportStatus(message) {
+    if (!exportStatus) { return; }
+    exportStatus.textContent = message;
+    exportStatus.hidden = false;
+  }
+  function generateExport() {
+    if (exportText) { exportText.value = buildExportText(); }
+    setExportStatus('Texto generado. Seleccionalo y copialo, o usá "Copiar texto".');
+  }
+  function copyExport() {
+    if (!exportText) { return; }
+    if (!exportText.value) { exportText.value = buildExportText(); }
+    exportText.focus();
+    exportText.select();
+    try { exportText.setSelectionRange(0, exportText.value.length); } catch (e) {}
+    var copied = false;
+    // Intento principal (funciona en file:// vía execCommand).
+    try { copied = document.execCommand("copy"); } catch (e) { copied = false; }
+    // Best-effort con la Clipboard API si está disponible (no envía nada externo).
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      try { navigator.clipboard.writeText(exportText.value); copied = true; } catch (e) {}
+    }
+    setExportStatus(
+      copied
+        ? "Texto copiado al portapapeles."
+        : "Seleccioná el texto del recuadro y copialo manualmente (Ctrl/Cmd+C)."
+    );
+  }
+  function printExport() {
+    if (exportText && !exportText.value) { exportText.value = buildExportText(); }
+    window.print(); // vista de impresión nativa del navegador, sin guardar ni enviar.
+  }
+
   /* ── Wiring ──────────────────────────────────────────────────────────── */
   captureDemoDefaults();
   fillEditorFrom(demoText);
@@ -164,4 +247,7 @@
   if (input) { input.addEventListener("input", clearError); }
   if (applyBtn) { applyBtn.addEventListener("click", applyEdits); }
   if (restoreBtn) { restoreBtn.addEventListener("click", restoreDemo); }
+  if (generateBtn) { generateBtn.addEventListener("click", generateExport); }
+  if (copyBtn) { copyBtn.addEventListener("click", copyExport); }
+  if (printBtn) { printBtn.addEventListener("click", printExport); }
 })();

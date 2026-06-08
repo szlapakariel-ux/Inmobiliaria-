@@ -56,6 +56,21 @@ de la oferta demo: título, descripción, diferenciales y texto del CTA.
 - Si quedan campos vacíos, aparece un aviso suave (no bloquea).
 - El CTA sigue siendo un placeholder (`#contacto`), sin número ni WhatsApp real.
 
+### Exportar la oferta como texto (local)
+
+Bajo la oferta, el bloque "Exportar oferta editada" arma un texto comercial con
+los datos visibles/editados:
+
+- **"Generar texto comercial"** crea el texto en un recuadro seleccionable
+  (incluye el aviso *"DEMO — datos ficticios, no publicar."*).
+- **"Copiar texto"** intenta copiar al portapapeles; si el navegador no lo
+  permite, el recuadro queda seleccionable para copiar manualmente (Ctrl/Cmd+C).
+- **"Ver versión para imprimir"** abre el diálogo de impresión nativo del
+  navegador (no guarda ni envía nada).
+
+Copiar/exportar **no envía ni publica nada**: no abre WhatsApp, no usa WhatsApp
+real, no hay backend, scraping, IA real ni guardado. Todo es local y manual.
+
 ## Qué es y qué NO es
 
 Esta demo:
