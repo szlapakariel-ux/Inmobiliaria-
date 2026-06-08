@@ -658,11 +658,11 @@ body.mode-client .site-footer { margin-top: 24px; }
 
 .client-view--audaz .offer-card {
   width: 100%;
-  max-width: 460px;
+  max-width: 100%;
   margin: 0 auto;
   background: var(--gc-card);
   border: 1px solid var(--gc-line);
-  border-radius: 22px;
+  border-radius: 18px;
   box-shadow: 0 14px 40px rgba(29, 35, 48, 0.14);
   overflow: hidden;
   padding: 0;
@@ -1103,11 +1103,22 @@ body.mode-client:has(.client-view--audaz) main {
   margin: 0;
 }
 body.mode-client:has(.client-view--audaz) .client-view--audaz {
-  padding: 16px 12px 32px;
+  padding: 0 0 24px;
+}
+body.mode-client:has(.client-view--audaz) .client-view--audaz .offer-card {
+  border-radius: 0;
+  border-left: none;
+  border-right: none;
 }
 @media (min-width: 720px) {
   body.mode-client:has(.client-view--audaz) .client-view--audaz {
     padding: 28px 24px 40px;
+  }
+  body.mode-client:has(.client-view--audaz) .client-view--audaz .offer-card {
+    max-width: 520px;
+    border-radius: 22px;
+    border-left: 1px solid var(--gc-line);
+    border-right: 1px solid var(--gc-line);
   }
 }
 
@@ -1124,10 +1135,21 @@ body.mode-client-audaz main {
   margin: 0;
 }
 body.mode-client-audaz .client-view--audaz {
-  padding: 16px 12px 32px;
+  padding: 0 0 24px;
+}
+body.mode-client-audaz .client-view--audaz .offer-card {
+  border-radius: 0;
+  border-left: none;
+  border-right: none;
 }
 @media (min-width: 720px) {
   body.mode-client-audaz .client-view--audaz {
     padding: 28px 24px 40px;
+  }
+  body.mode-client-audaz .client-view--audaz .offer-card {
+    max-width: 520px;
+    border-radius: 22px;
+    border-left: 1px solid var(--gc-line);
+    border-right: 1px solid var(--gc-line);
   }
 }
