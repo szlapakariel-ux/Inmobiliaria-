@@ -49,23 +49,26 @@
       </div>
 
       <div class="sim-notice" role="note">
-        <strong>Link ficticio de ejemplo</strong> — no se abre, no se descarga ni se consulta.
-        La transformación es 100&nbsp;% simulada localmente.
+        <strong>Pegá un link para simular el flujo.</strong> Esta demo no consulta
+        internet ni extrae datos reales — solo simula la transformación localmente.
       </div>
 
-      <!-- Campo estilo navegador con link ficticio -->
+      <!-- Campo editable estilo navegador (link genérico de ejemplo) -->
       <div class="browser-field">
         <span class="browser-dots" aria-hidden="true"><i></i><i></i><i></i></span>
         <input
           id="link-input"
           class="link-input"
           type="text"
-          readonly
+          spellcheck="false"
+          autocomplete="off"
+          placeholder="Pegá aquí el link de la publicación…"
           value="https://portal-ejemplo.invalid/propiedad-demo-123"
-          aria-label="Link de la publicación (demo, ficticio)"
+          aria-label="Link de la publicación (editable, demo)"
         />
       </div>
-      <p class="field-note">Ficha de portal genérica, sin tu marca, igual a las demás · dominio <code>.invalid</code> no navegable.</p>
+      <p class="field-note">Editá o pegá otro link genérico. El link no se consulta: dominio de ejemplo, demo simulada.</p>
+      <p id="link-error" class="link-error" role="alert" hidden></p>
 
       <button id="transform-btn" class="btn-primary" type="button">
         Transformar en oferta profesional
@@ -83,6 +86,13 @@
         <strong>Simulación local</strong> — no hay internet, scraping, fetch, APIs ni datos reales.
         Todo ocurre en tu dispositivo.
       </div>
+
+      <!-- Eco del link recibido (no se consulta, solo se muestra) -->
+      <p class="link-received" id="link-received" hidden>
+        <span class="lr-label">Link recibido</span>
+        <span class="lr-value" id="link-received-value"></span>
+        <span class="lr-note">— no consultado, solo simulado</span>
+      </p>
 
       <ul class="steps" id="steps-list">
         <li class="step" data-step="1">
