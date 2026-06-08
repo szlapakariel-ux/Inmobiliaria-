@@ -9,12 +9,12 @@
 </head>
 <body>
 
-  <!-- Aviso global de demo -->
+  <!-- ── Aviso global de demo (G1-C: más visible) ─────────────────── -->
   <div class="demo-banner" role="alert">
-    DEMO — datos ficticios, no publicar
+    <strong>⚠ DEMO TÉCNICA</strong> — datos ficticios · no publicar · no consulta internet · no scraping · no publica nada
   </div>
 
-  <!-- Header con identidad de Guadalupe -->
+  <!-- ── Header con identidad de Guadalupe ─────────────────────────── -->
   <header class="site-header">
     <div class="brand">
       <div class="brand-avatar" aria-hidden="true">GC</div>
@@ -28,12 +28,40 @@
 
   <main>
 
-    <!-- Bloque de entrada: pegá el link -->
+    <!-- ── G1-B: Bloque Antes / Después ──────────────────────────────── -->
+    <section class="card before-after" aria-label="Qué cambia con esta herramienta">
+      <div class="ba-col ba-before">
+        <span class="ba-label">Antes</span>
+        <p class="ba-text">Un link genérico de portal, igual al de cualquier otra publicación. Difícil de diferenciar.</p>
+        <div class="ba-example">
+          <span class="ba-link-icon" aria-hidden="true">🔗</span>
+          <code class="ba-link-code">portal-ejemplo.com/prop-45231</code>
+        </div>
+      </div>
+      <div class="ba-arrow" aria-hidden="true">→</div>
+      <div class="ba-col ba-after">
+        <span class="ba-label ba-label--after">Después</span>
+        <p class="ba-text">Una oferta profesional, clara y con el sello de Guadalupe. Tu voz, tu presentación.</p>
+        <div class="ba-example ba-example--after">
+          <span class="ba-gc-badge" aria-hidden="true">GC</span>
+          <span class="ba-after-tag">Oferta con sello propio</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Bloque de entrada: pegá el link ───────────────────────────── -->
     <section class="card input-section" aria-labelledby="input-title">
       <h1 id="input-title" class="section-title">Pegá el link de la publicación</h1>
       <p class="section-sub">
-        Tomamos una publicación genérica y la transformamos en una oferta profesional con el sello de Guadalupe.
+        Tomamos una publicación genérica y la transformamos en una oferta profesional
+        con el sello de Guadalupe.
       </p>
+
+      <!-- G1-C: aviso de link ficticio con mayor visibilidad -->
+      <div class="sim-notice" role="note">
+        <strong>Link ficticio de ejemplo</strong> — no se abre, no se descarga ni se consulta.
+        La transformación es 100% simulada localmente.
+      </div>
 
       <label class="field-label" for="link-input">Link de la publicación (demo)</label>
       <div class="input-row">
@@ -47,7 +75,7 @@
         />
       </div>
       <p id="link-note" class="field-note">
-        Link ficticio de ejemplo. La demo no abre, no descarga ni consulta este enlace.
+        Dominio <code>.invalid</code> — no navegable por diseño (RFC 2606).
       </p>
 
       <button id="transform-btn" class="btn-primary" type="button">
@@ -55,9 +83,16 @@
       </button>
     </section>
 
-    <!-- Estados simulados de transformación -->
+    <!-- ── Estados simulados de transformación ───────────────────────── -->
     <section id="process-section" class="card process-section" hidden aria-labelledby="process-title">
       <h2 id="process-title" class="section-title">Transformando…</h2>
+
+      <!-- G1-C: aviso de simulación con mayor visibilidad -->
+      <div class="sim-notice" role="note">
+        <strong>Simulación local</strong> — no hay internet, scraping, fetch, APIs ni datos reales.
+        Todo el proceso ocurre en tu dispositivo.
+      </div>
+
       <ul class="steps" id="steps-list">
         <li class="step" data-step="1">
           <span class="step-icon" aria-hidden="true"></span>
@@ -76,10 +111,9 @@
           <span class="step-label">Oferta lista con sello de Guadalupe</span>
         </li>
       </ul>
-      <p class="field-note">Simulación local. No hay scraping, fetch, API ni datos reales.</p>
     </section>
 
-    <!-- Salida: oferta profesional -->
+    <!-- ── Oferta profesional (resultado de la transformación) ────────── -->
     <section id="offer-section" class="offer-section" hidden aria-labelledby="offer-title">
 
       <div class="offer-card">
@@ -98,7 +132,7 @@
           </div>
         </div>
 
-        <!-- Encabezado de la oferta -->
+        <!-- G1-D: encabezado de oferta compacto -->
         <div class="offer-head">
           <span class="offer-op">Venta</span>
           <h2 id="offer-title" class="offer-title">Departamento 2 ambientes con balcón en Palermo</h2>
@@ -106,24 +140,23 @@
           <p class="offer-price">USD 118.000 <span class="offer-price-note">+ Expensas ARS 95.000</span></p>
         </div>
 
-        <!-- Datos clave -->
+        <!-- G1-D: datos clave — 2 columnas en mobile, compacto -->
         <div class="specs">
           <div class="spec"><span class="spec-val">2</span><span class="spec-key">Ambientes</span></div>
           <div class="spec"><span class="spec-val">1</span><span class="spec-key">Dormitorio</span></div>
           <div class="spec"><span class="spec-val">1</span><span class="spec-key">Baño</span></div>
-          <div class="spec"><span class="spec-val">48 m²</span><span class="spec-key">Sup. total</span></div>
-          <div class="spec"><span class="spec-val">42 m²</span><span class="spec-key">Sup. cubierta</span></div>
-          <div class="spec"><span class="spec-val">Muy bueno</span><span class="spec-key">Estado</span></div>
+          <div class="spec"><span class="spec-val">48 m²</span><span class="spec-key">Total</span></div>
+          <div class="spec"><span class="spec-val">42 m²</span><span class="spec-key">Cubierta</span></div>
+          <div class="spec"><span class="spec-val">Apto crédito</span><span class="spec-key">Financiación</span></div>
         </div>
 
-        <!-- Descripción comercial -->
+        <!-- G1-D: descripción simplificada -->
         <div class="offer-block">
-          <h3 class="block-title">Descripción</h3>
+          <h3 class="block-title">La propiedad</h3>
           <p class="offer-desc">
-            Luminoso 2 ambientes en el corazón de Palermo, con balcón al frente y excelente
-            distribución. Living comedor integrado, dormitorio amplio con placard y cocina
-            equipada. Edificio cuidado, a metros de transporte, gastronomía y espacios verdes.
-            Una oportunidad ideal para vivir o invertir en una de las zonas más demandadas de CABA.
+            Luminoso 2 ambientes en Palermo, con balcón al frente y buena distribución.
+            Edificio cuidado, cerca de transporte y espacios verdes. Estado muy bueno,
+            listo para mudarse o invertir.
           </p>
         </div>
 
@@ -131,10 +164,10 @@
         <div class="offer-block">
           <h3 class="block-title">Diferenciales</h3>
           <ul class="diffs">
-            <li>Balcón con orientación al frente</li>
+            <li>Balcón orientado al frente</li>
             <li>Apto crédito hipotecario</li>
-            <li>Ubicación premium en Palermo</li>
-            <li>Listo para mudarse — estado muy bueno</li>
+            <li>Palermo, a metros de todo</li>
+            <li>Estado muy bueno — listo para entrar</li>
           </ul>
         </div>
 
@@ -149,8 +182,7 @@
           <h3 class="block-title">Guadalupe te acompaña</h3>
           <p>
             No es una ficha de portal: es una oferta presentada por <strong>Guadalupe Cabrera</strong>.
-            Te asesoro en cada paso, ordeno la información y la presento de forma clara y profesional
-            para que tu propiedad se destaque.
+            Organizo la información y la presento de forma clara para que tu propiedad se destaque.
           </p>
         </div>
 
@@ -158,15 +190,22 @@
         <div class="offer-block owner-block">
           <h3 class="block-title">¿Sos propietario/a?</h3>
           <p>
-            Convierto el link de tu publicación en una oferta profesional con identidad propia.
-            Más presencia, mejor presentación y una comunicación que transmite confianza.
+            Convierto el link de tu publicación en una oferta profesional con tu identidad.
+            Más presencia, mejor comunicación, más confianza.
           </p>
         </div>
 
-        <!-- Aviso de validación -->
+        <!-- G1-A: frase madre en el cierre (conclusión del recorrido) -->
+        <div class="offer-block closing-claim">
+          <p class="closing-text">
+            De link genérico a oferta profesional con tu sello.
+          </p>
+          <p class="closing-sub">Eso es exactamente lo que acabas de ver.</p>
+        </div>
+
         <p class="validation-note">
-          Aviso: información de demostración con datos ficticios. Los valores, medidas y
-          condiciones deben validarse antes de cualquier publicación o uso comercial real.
+          Aviso: información de demostración con datos ficticios. No es una publicación comercial activa.
+          Los valores, medidas y condiciones deben validarse antes de cualquier uso real.
         </p>
 
       </div>
@@ -174,10 +213,10 @@
 
   </main>
 
-  <!-- Footer simple -->
+  <!-- Footer -->
   <footer class="site-footer">
-    <p>Guadalupe Cabrera — Asesora inmobiliaria · Demo técnica MC-INMO-5A</p>
-    <p class="footer-note">Datos ficticios. No es producción. Sin deploy, sin backend, sin datos reales.</p>
+    <p>Guadalupe Cabrera — Asesora inmobiliaria · Demo técnica MC-INMO-5C</p>
+    <p class="footer-note">Datos ficticios. No es producción. Sin deploy, sin backend, sin datos reales. Sin imágenes de terceros.</p>
   </footer>
 
   <script src="script.js"></script>

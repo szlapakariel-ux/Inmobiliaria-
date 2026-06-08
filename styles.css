@@ -1,16 +1,19 @@
-/* MC-INMO-5A — Demo estática. Solo CSS, sin dependencias externas. */
+/* MC-INMO-5C — Ajustes G1 sobre demo MC-INMO-5A. Solo CSS, sin dependencias externas. */
 
 :root {
   --gc-ink: #1f2430;
   --gc-muted: #5c6577;
   --gc-bg: #f4f1ec;
   --gc-card: #ffffff;
-  --gc-accent: #b08d57;      /* dorado sobrio — sello de Guadalupe */
+  --gc-accent: #b08d57;
   --gc-accent-soft: #f3ead9;
   --gc-green: #1f8a52;
   --gc-line: #e4e0d8;
   --gc-warn-bg: #fff4d6;
   --gc-warn-ink: #8a6d1a;
+  --gc-sim-bg: #eef4fb;
+  --gc-sim-ink: #2a4a72;
+  --gc-sim-border: #b8d0ed;
   --radius: 14px;
   --shadow: 0 6px 24px rgba(31, 36, 48, 0.08);
 }
@@ -31,19 +34,18 @@ main {
   padding: 16px;
 }
 
-/* Banner de demo */
+/* ── G1-C: Banner de demo — más visible ──────────────────────────────── */
 .demo-banner {
   background: var(--gc-warn-bg);
   color: var(--gc-warn-ink);
   text-align: center;
-  font-weight: 700;
-  font-size: 0.85rem;
-  letter-spacing: 0.04em;
-  padding: 8px 12px;
-  border-bottom: 1px solid #e7d9a8;
+  font-size: 0.88rem;
+  padding: 10px 16px;
+  border-bottom: 2px solid #e7d9a8;
+  line-height: 1.4;
 }
 
-/* Header */
+/* ── Header ──────────────────────────────────────────────────────────── */
 .site-header {
   max-width: 720px;
   margin: 0 auto;
@@ -73,7 +75,7 @@ main {
   color: var(--gc-ink);
 }
 
-/* Cards genéricas */
+/* ── Cards ───────────────────────────────────────────────────────────── */
 .card {
   background: var(--gc-card);
   border: 1px solid var(--gc-line);
@@ -86,6 +88,105 @@ main {
 .section-title { margin: 0 0 6px; font-size: 1.15rem; }
 .section-sub { margin: 0 0 16px; color: var(--gc-muted); font-size: 0.95rem; }
 
+/* ── G1-C: Aviso de simulación — visible, no escondido ───────────────── */
+.sim-notice {
+  background: var(--gc-sim-bg);
+  border: 1px solid var(--gc-sim-border);
+  border-radius: 8px;
+  color: var(--gc-sim-ink);
+  font-size: 0.9rem;
+  padding: 10px 14px;
+  margin: 0 0 16px;
+  line-height: 1.45;
+}
+
+/* ── G1-B: Bloque Antes / Después ────────────────────────────────────── */
+.before-after {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.ba-col {
+  flex: 1;
+  padding: 18px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ba-before { background: #f7f5f0; border-right: 1px solid var(--gc-line); }
+.ba-after  { background: var(--gc-accent-soft); }
+
+.ba-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--gc-muted);
+  display: block;
+}
+.ba-label--after { color: var(--gc-accent); }
+
+.ba-text {
+  font-size: 0.9rem;
+  color: var(--gc-ink);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.ba-example {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0,0,0,0.04);
+  border-radius: 8px;
+  padding: 8px 10px;
+  margin-top: auto;
+}
+.ba-example--after { background: rgba(176,141,87,0.1); }
+
+.ba-link-icon { font-size: 1rem; }
+.ba-link-code {
+  font-size: 0.78rem;
+  color: var(--gc-muted);
+  word-break: break-all;
+  font-family: "SFMono-Regular", Consolas, monospace;
+}
+
+.ba-gc-badge {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--gc-accent);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.75rem;
+  display: flex; align-items: center; justify-content: center;
+  flex: 0 0 auto;
+}
+
+.ba-after-tag {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--gc-accent);
+}
+
+.ba-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: var(--gc-accent);
+  padding: 0 4px;
+  flex: 0 0 auto;
+  background: var(--gc-card);
+  border-left: 1px solid var(--gc-line);
+  border-right: 1px solid var(--gc-line);
+}
+
+/* ── Input section ───────────────────────────────────────────────────── */
 .field-label {
   display: block;
   font-size: 0.8rem;
@@ -106,11 +207,13 @@ main {
   border-radius: 10px;
   background: #faf8f4;
   color: var(--gc-ink);
+  font-family: "SFMono-Regular", Consolas, monospace;
 }
 
 .field-note { margin: 8px 0 0; font-size: 0.8rem; color: var(--gc-muted); }
+code { font-family: "SFMono-Regular", Consolas, monospace; font-size: 0.85em; }
 
-/* Botones */
+/* ── Botones ─────────────────────────────────────────────────────────── */
 .btn-primary {
   margin-top: 16px;
   width: 100%;
@@ -128,12 +231,12 @@ main {
 .btn-primary:active { transform: scale(0.99); }
 .btn-primary:disabled { opacity: 0.6; cursor: default; }
 
-/* Pasos de transformación */
-.steps { list-style: none; margin: 8px 0 0; padding: 0; }
+/* ── Pasos de transformación ─────────────────────────────────────────── */
+.steps { list-style: none; margin: 12px 0 0; padding: 0; }
 
 .step {
   display: flex; align-items: center; gap: 12px;
-  padding: 10px 0;
+  padding: 11px 0;
   border-bottom: 1px dashed var(--gc-line);
   opacity: 0.45;
   transition: opacity 0.3s ease;
@@ -167,7 +270,7 @@ main {
 
 .step-label { font-size: 0.98rem; font-weight: 600; }
 
-/* Oferta */
+/* ── Oferta ──────────────────────────────────────────────────────────── */
 .offer-section { margin: 16px 0 0; }
 
 .offer-card {
@@ -181,14 +284,15 @@ main {
 .offer-flag {
   background: var(--gc-warn-bg);
   color: var(--gc-warn-ink);
-  font-size: 0.75rem;
+  font-size: 0.78rem;
   font-weight: 700;
   text-align: center;
-  padding: 6px;
+  padding: 7px;
   letter-spacing: 0.03em;
+  border-bottom: 1px solid #e7d9a8;
 }
 
-/* Galería placeholder */
+/* Galería placeholder (sin imágenes) */
 .gallery { padding: 12px; }
 
 .placeholder-img {
@@ -201,12 +305,13 @@ main {
   font-size: 0.82rem;
 }
 
-.gallery-main { height: 200px; margin-bottom: 8px; }
+.gallery-main { height: 180px; margin-bottom: 8px; }
 
-.gallery-thumbs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-.thumb { height: 70px; }
+/* G1-E: thumbs en 2 columnas en mobile angosto */
+.gallery-thumbs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+.thumb { height: 65px; }
 
-.placeholder-tag { padding: 4px 8px; }
+.placeholder-tag { padding: 4px 8px; text-align: center; }
 
 /* Cabecera oferta */
 .offer-head { padding: 4px 18px 0; }
@@ -223,40 +328,40 @@ main {
   letter-spacing: 0.05em;
 }
 
-.offer-title { margin: 10px 0 4px; font-size: 1.35rem; line-height: 1.25; }
+.offer-title { margin: 10px 0 4px; font-size: 1.25rem; line-height: 1.25; }
 .offer-zone { margin: 0; color: var(--gc-muted); }
 
 .offer-price {
-  margin: 12px 0 4px;
-  font-size: 1.5rem;
+  margin: 10px 0 4px;
+  font-size: 1.4rem;
   font-weight: 800;
   color: var(--gc-ink);
 }
-.offer-price-note { font-size: 0.85rem; font-weight: 500; color: var(--gc-muted); }
+.offer-price-note { font-size: 0.82rem; font-weight: 500; color: var(--gc-muted); }
 
-/* Specs */
+/* G1-D/E: specs — 2 columnas por defecto (más compacto en mobile) */
 .specs {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  padding: 16px 18px;
+  gap: 8px;
+  padding: 14px 18px;
 }
 .spec {
   background: #faf8f4;
   border: 1px solid var(--gc-line);
   border-radius: 10px;
-  padding: 10px;
+  padding: 9px;
   text-align: center;
 }
-.spec-val { display: block; font-weight: 700; font-size: 1rem; }
-.spec-key { display: block; font-size: 0.75rem; color: var(--gc-muted); margin-top: 2px; }
+.spec-val { display: block; font-weight: 700; font-size: 0.95rem; }
+.spec-key { display: block; font-size: 0.72rem; color: var(--gc-muted); margin-top: 2px; }
 
-/* Bloques */
-.offer-block { padding: 8px 18px 16px; }
-.block-title { margin: 4px 0 8px; font-size: 1.05rem; color: var(--gc-accent); }
-.offer-desc { margin: 0; color: #3a4150; }
+/* Bloques de contenido */
+.offer-block { padding: 6px 18px 16px; }
+.block-title { margin: 4px 0 8px; font-size: 1rem; color: var(--gc-accent); }
+.offer-desc { margin: 0; color: #3a4150; font-size: 0.95rem; }
 
-.diffs { margin: 0; padding-left: 18px; color: #3a4150; }
+.diffs { margin: 0; padding-left: 18px; color: #3a4150; font-size: 0.95rem; }
 .diffs li { margin: 4px 0; }
 
 .accent-block {
@@ -267,27 +372,52 @@ main {
 .owner-block { background: #f7f5f0; }
 
 /* CTA */
-.offer-cta { padding: 16px 18px; text-align: center; }
+.offer-cta { padding: 14px 18px; text-align: center; }
 .btn-whatsapp {
   display: inline-block;
   background: var(--gc-green);
   color: #fff;
   text-decoration: none;
   font-weight: 700;
-  padding: 13px 22px;
+  padding: 13px 28px;
   border-radius: 12px;
+  font-size: 1rem;
+  width: 100%;
+  text-align: center;
 }
 .btn-whatsapp:hover { background: #1a7546; }
 
+/* G1-A: Cierre — frase madre como conclusión del recorrido */
+.closing-claim {
+  text-align: center;
+  background: var(--gc-ink);
+  color: #fff;
+  border-top: none;
+  padding: 22px 18px 20px;
+}
+.closing-text {
+  margin: 0 0 6px;
+  font-size: 1.15rem;
+  font-weight: 800;
+  line-height: 1.25;
+  color: #fff;
+}
+.closing-sub {
+  margin: 0;
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.7);
+}
+.closing-claim .block-title { color: rgba(255,255,255,0.7); }
+
 .validation-note {
   margin: 0;
-  padding: 14px 18px 20px;
-  font-size: 0.8rem;
+  padding: 12px 18px 18px;
+  font-size: 0.78rem;
   color: var(--gc-muted);
   border-top: 1px solid var(--gc-line);
 }
 
-/* Footer */
+/* ── Footer ──────────────────────────────────────────────────────────── */
 .site-footer {
   text-align: center;
   padding: 24px 16px 40px;
@@ -296,9 +426,29 @@ main {
 }
 .footer-note { font-size: 0.78rem; margin-top: 4px; }
 
-/* Responsive — celular primero, ajuste para pantallas chicas */
-@media (max-width: 420px) {
+/* ── G1-E: Responsive mobile ─────────────────────────────────────────── */
+
+/* Mobile medio (≤520px) */
+@media (max-width: 520px) {
   .brand-claim { font-size: 1.1rem; }
+  .before-after { flex-direction: column; }
+  .ba-arrow { padding: 6px 0; border: none; border-top: 1px solid var(--gc-line); border-bottom: 1px solid var(--gc-line); justify-content: center; }
+  .ba-before { border-right: none; border-bottom: 1px solid var(--gc-line); }
   .specs { grid-template-columns: repeat(2, 1fr); }
-  .offer-price { font-size: 1.3rem; }
+  .offer-price { font-size: 1.25rem; }
+  .offer-title { font-size: 1.1rem; }
+}
+
+/* Mobile angosto (≤360px) */
+@media (max-width: 360px) {
+  .brand-claim { font-size: 1rem; }
+  .link-input { font-size: 0.82rem; padding: 10px 10px; }
+  .gallery-thumbs { grid-template-columns: repeat(2, 1fr); }
+  .thumb { height: 58px; }
+  .specs { grid-template-columns: repeat(2, 1fr); gap: 6px; }
+  .spec-val { font-size: 0.88rem; }
+  .step-label { font-size: 0.9rem; }
+  .btn-primary { font-size: 0.95rem; padding: 13px; }
+  .closing-text { font-size: 1rem; }
+  .sim-notice { font-size: 0.84rem; }
 }
