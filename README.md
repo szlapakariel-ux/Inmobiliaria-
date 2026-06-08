@@ -41,6 +41,20 @@ genérico (como texto) y simular el flujo.
 - Si el texto no parece un link, pide *"Para esta demo, ingresá un link de ejemplo."*
 - La oferta final **siempre usa los datos ficticios** ya definidos: no cambia por
   el link ingresado.
+- Podés pegar incluso un **link real de un portal** (ej. ZonaProp): se usa solo
+  como texto de entrada. La demo **no consulta la publicación** ni copia su contenido.
+
+### Edición local del texto comercial
+
+Tras la transformación, un panel permite **editar localmente** el texto comercial
+de la oferta demo: título, descripción, diferenciales y texto del CTA.
+
+- **"Aplicar cambios a la oferta"** actualiza la oferta visualmente, **solo en el
+  navegador**. No guarda (sin localStorage, cookies ni servidor), no publica y
+  **no usa IA real**.
+- **"Restaurar texto demo"** vuelve a los textos ficticios originales.
+- Si quedan campos vacíos, aparece un aviso suave (no bloquea).
+- El CTA sigue siendo un placeholder (`#contacto`), sin número ni WhatsApp real.
 
 ## Qué es y qué NO es
 

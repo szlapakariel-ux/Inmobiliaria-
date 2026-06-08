@@ -1,11 +1,14 @@
 /*
- * MC-INMO-5F — Demo estática con prueba de link genérico.
- * JavaScript mínimo: valida el input localmente, hace eco del link recibido
- * y orquesta la simulación visual del flujo LINK -> TRANSFORMACIÓN -> OFERTA.
+ * MC-INMO-5G — Demo estática con prueba de link y edición local del texto.
+ * JavaScript mínimo:
+ *  - valida el input localmente y hace eco del link recibido (no lo consulta);
+ *  - orquesta la simulación visual LINK -> TRANSFORMACIÓN -> OFERTA;
+ *  - permite editar localmente el texto comercial de la oferta demo.
  *
- * IMPORTANTE: el link NO se consulta. No hay fetch, scraping, APIs, navegación
- * automática, descarga de imágenes ni extracción de datos reales. La oferta
- * usa siempre los datos ficticios ya definidos en el HTML.
+ * IMPORTANTE: el link NO se consulta (sin fetch, scraping, APIs, navegación
+ * automática ni descarga). La edición es 100% local en el navegador: NO usa IA
+ * real, NO guarda (sin localStorage, cookies ni backend) y NO publica. La oferta
+ * parte siempre de datos ficticios.
  */
 (function () {
   "use strict";
@@ -19,64 +22,82 @@
   var linkReceivedValue = document.getElementById("link-received-value");
   var steps = Array.prototype.slice.call(document.querySelectorAll(".step"));
 
-  // Tiempo simulado entre estados (solo efecto visual).
   var STEP_DELAY = 700;
 
+  /* ── Campos editables de la oferta y editor ──────────────────────────── */
+  var offerFields = {
+    title: document.getElementById("offer-title"),
+    desc: document.getElementById("offer-desc"),
+    diff1: document.getElementById("diff-1"),
+    diff2: document.getElementById("diff-2"),
+    diff3: document.getElementById("diff-3"),
+    cta: document.getElementById("cta-text")
+  };
+  var editFields = {
+    title: document.getElementById("edit-title"),
+    desc: document.getElementById("edit-desc"),
+    diff1: document.getElementById("edit-diff1"),
+    diff2: document.getElementById("edit-diff2"),
+    diff3: document.getElementById("edit-diff3"),
+    cta: document.getElementById("edit-cta")
+  };
+  var applyBtn = document.getElementById("apply-edits");
+  var restoreBtn = document.getElementById("restore-demo");
+  var editNotice = document.getElementById("edit-notice");
+
+  // Textos demo originales (única fuente de verdad, en memoria).
+  var demoText = {};
+  function captureDemoDefaults() {
+    Object.keys(offerFields).forEach(function (k) {
+      demoText[k] = offerFields[k] ? offerFields[k].textContent.trim() : "";
+    });
+  }
+  function fillEditorFrom(textObj) {
+    Object.keys(editFields).forEach(function (k) {
+      if (editFields[k]) { editFields[k].value = textObj[k] || ""; }
+    });
+  }
+
+  /* ── Link: validación mínima y eco (sin consultar nada) ──────────────── */
   function showError(message) {
     if (!errorBox) { return; }
     errorBox.textContent = message;
     errorBox.hidden = false;
     if (input) { input.classList.add("link-input--error"); }
   }
-
   function clearError() {
     if (!errorBox) { return; }
     errorBox.hidden = true;
     errorBox.textContent = "";
     if (input) { input.classList.remove("link-input--error"); }
   }
-
-  // Validación mínima local (sin consultar nada): ¿parece un link?
-  // No bloquea por dominios reales; acepta cualquier link genérico como texto.
+  // ¿Parece un link? Acepta cualquier link genérico o real como TEXTO.
   function looksLikeLink(value) {
     if (/\s/.test(value)) { return false; }
     return /^https?:\/\/\S+\.\S+/i.test(value) || /^\S+\.\S{2,}/.test(value);
   }
 
   function resetSteps() {
-    steps.forEach(function (step) {
-      step.classList.remove("active", "done");
-    });
+    steps.forEach(function (step) { step.classList.remove("active", "done"); });
   }
-
   function runStep(index) {
-    if (index >= steps.length) {
-      // Todos los estados completados -> mostrar la oferta (datos ficticios).
-      revealOffer();
-      return;
-    }
-
+    if (index >= steps.length) { revealOffer(); return; }
     var step = steps[index];
     step.classList.add("active");
-
     window.setTimeout(function () {
       step.classList.remove("active");
       step.classList.add("done");
       runStep(index + 1);
     }, STEP_DELAY);
   }
-
   function revealOffer() {
     offerSection.hidden = false;
     btn.disabled = false;
     btn.textContent = "Transformar de nuevo";
     offerSection.scrollIntoView({ behavior: "smooth", block: "start" });
   }
-
   function startTransformation() {
     var value = (input && input.value ? input.value : "").trim();
-
-    // F. Validación mínima del input.
     if (value === "") {
       showError("Pegá un link para iniciar la simulación.");
       if (input) { input.focus(); }
@@ -89,7 +110,7 @@
     }
     clearError();
 
-    // C. Eco del link recibido (solo se muestra, no se consulta).
+    // Eco del link recibido (solo se muestra, no se consulta).
     if (linkReceived && linkReceivedValue) {
       linkReceivedValue.textContent = value;
       linkReceived.hidden = false;
@@ -104,11 +125,43 @@
     runStep(0);
   }
 
-  if (btn) {
-    btn.addEventListener("click", startTransformation);
+  /* ── Edición local del texto comercial (solo en el navegador) ────────── */
+  function applyEdits() {
+    var empties = 0;
+    Object.keys(editFields).forEach(function (k) {
+      if (!editFields[k] || !offerFields[k]) { return; }
+      var v = editFields[k].value.trim();
+      if (v === "") { empties++; }
+      offerFields[k].textContent = v;
+    });
+    // F. Validación mínima: avisar campos vacíos, pero no bloquear.
+    if (editNotice) {
+      if (empties > 0) {
+        editNotice.textContent = "Hay campos vacíos en la oferta demo.";
+        editNotice.hidden = false;
+      } else {
+        editNotice.hidden = true;
+        editNotice.textContent = "";
+      }
+    }
+    if (offerSection) {
+      offerSection.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   }
-  // Limpiar el mensaje de error al editar el link.
-  if (input) {
-    input.addEventListener("input", clearError);
+  function restoreDemo() {
+    Object.keys(offerFields).forEach(function (k) {
+      if (offerFields[k]) { offerFields[k].textContent = demoText[k]; }
+    });
+    fillEditorFrom(demoText);
+    if (editNotice) { editNotice.hidden = true; editNotice.textContent = ""; }
   }
+
+  /* ── Wiring ──────────────────────────────────────────────────────────── */
+  captureDemoDefaults();
+  fillEditorFrom(demoText);
+
+  if (btn) { btn.addEventListener("click", startTransformation); }
+  if (input) { input.addEventListener("input", clearError); }
+  if (applyBtn) { applyBtn.addEventListener("click", applyEdits); }
+  if (restoreBtn) { restoreBtn.addEventListener("click", restoreDemo); }
 })();

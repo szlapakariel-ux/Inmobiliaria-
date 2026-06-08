@@ -67,7 +67,8 @@
           aria-label="Link de la publicación (editable, demo)"
         />
       </div>
-      <p class="field-note">Editá o pegá otro link genérico. El link no se consulta: dominio de ejemplo, demo simulada.</p>
+      <p class="field-note">Editá o pegá otro link genérico —incluso uno real de un portal—: se usa solo como texto de entrada.</p>
+      <p class="field-note field-note--warn">Link real usado solo como ejemplo de entrada. Esta demo no consulta la publicación.</p>
       <p id="link-error" class="link-error" role="alert" hidden></p>
 
       <button id="transform-btn" class="btn-primary" type="button">
@@ -170,7 +171,7 @@
           <!-- Descripción -->
           <div class="offer-section-block">
             <p class="block-eyebrow">Descripción</p>
-            <p class="offer-desc">
+            <p class="offer-desc" id="offer-desc">
               Una propuesta clara, luminosa y funcional para quienes buscan vivir cerca
               de todo. Balcón con buena orientación, distribución aprovechada y una zona
               muy conectada. Presentada de forma profesional y con acompañamiento personalizado.
@@ -182,15 +183,14 @@
           <div class="offer-section-block">
             <p class="block-eyebrow">Diferenciales</p>
             <ul class="diffs">
-              <li>Balcón luminoso</li>
-              <li>Buena distribución</li>
-              <li>Zona conectada</li>
-              <li>1ª vivienda o inversión</li>
+              <li id="diff-1">Balcón luminoso</li>
+              <li id="diff-2">Buena distribución</li>
+              <li id="diff-3">Zona conectada</li>
             </ul>
           </div>
 
           <!-- CTA placeholder WhatsApp -->
-          <a href="#contacto" class="btn-whatsapp" id="cta-whatsapp">💬 Consultar por WhatsApp</a>
+          <a href="#contacto" class="btn-whatsapp" id="cta-whatsapp"><span aria-hidden="true">💬</span> <span id="cta-text">Consultar por WhatsApp</span></a>
           <p class="field-note field-note--center">CTA placeholder — sin número real, sin envío automático.</p>
 
           <!-- Bloque de confianza -->
@@ -218,6 +218,47 @@
 
         <!-- Aviso DEMO al pie de la pieza -->
         <div class="offer-foot-flag">DEMO — DATOS FICTICIOS — NO PUBLICAR</div>
+      </div>
+
+      <!-- A/B/C/D/F: Panel de edición local del texto comercial -->
+      <div class="editor card" aria-labelledby="editor-title">
+        <h3 id="editor-title" class="editor-title">Editá el texto comercial antes de compartir</h3>
+        <div class="sim-notice" role="note">
+          <strong>Edición local de demo.</strong> No guarda, no publica y no usa IA real.
+          Esta demo no consulta internet, no lee publicaciones y no extrae datos reales.
+        </div>
+
+        <label class="edit-label" for="edit-title">Título de la oferta</label>
+        <input id="edit-title" class="edit-field" type="text" />
+
+        <label class="edit-label" for="edit-desc">Descripción comercial</label>
+        <textarea id="edit-desc" class="edit-field" rows="4"></textarea>
+
+        <div class="edit-grid">
+          <div>
+            <label class="edit-label" for="edit-diff1">Diferencial 1</label>
+            <input id="edit-diff1" class="edit-field" type="text" />
+          </div>
+          <div>
+            <label class="edit-label" for="edit-diff2">Diferencial 2</label>
+            <input id="edit-diff2" class="edit-field" type="text" />
+          </div>
+          <div>
+            <label class="edit-label" for="edit-diff3">Diferencial 3</label>
+            <input id="edit-diff3" class="edit-field" type="text" />
+          </div>
+          <div>
+            <label class="edit-label" for="edit-cta">Texto del CTA</label>
+            <input id="edit-cta" class="edit-field" type="text" />
+          </div>
+        </div>
+
+        <p id="edit-notice" class="edit-notice" role="alert" hidden></p>
+
+        <div class="edit-actions">
+          <button id="apply-edits" class="btn-primary btn-apply" type="button">Aplicar cambios a la oferta</button>
+          <button id="restore-demo" class="btn-restore" type="button">Restaurar texto demo</button>
+        </div>
       </div>
 
       <!-- Cierre: frase madre como conclusión -->
