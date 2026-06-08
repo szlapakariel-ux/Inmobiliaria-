@@ -96,16 +96,26 @@ La demo tiene **dos vistas**:
 
 El bloque **"Generar link para cliente"** crea un link compartible de demo:
 
-- **"Generar link para cliente"** arma una URL con los textos visibles/editados.
+- **"Generar link para cliente"** arma el link con los textos visibles/editados.
 - **"Copiar link"** copia ese link (o queda seleccionable para copiar manual).
+- **"Compartir link"** usa el **compartir nativo del navegador** (Web Share API);
+  aparece solo si el dispositivo lo soporta — ideal en mobile. No abre WhatsApp real.
 - **"Abrir vista cliente"** abre la vista limpia en esta misma pestaña.
+
+La salida principal son esas acciones; **la URL completa queda colapsada** en "Ver
+link completo" (no hace falta ver el link enorme para compartirlo).
+
+El link es **más corto que antes**: usa claves abreviadas, **omite los campos que no
+cambiaron** respecto del demo y una codificación compacta (base64 URL-safe). La vista
+cliente, además, fue **optimizada para mobile y desktop** (ancho fluido y tipografía
+legible con `clamp()`).
 
 Al abrir ese link, se ve únicamente la pieza profesional (sin controles internos).
 
 **Sin backend ni base de datos:** los textos viajan **dentro de la propia URL**, en
-el fragmento `#hash` (codificados localmente con `encodeURIComponent` + `btoa`). No
-se guarda nada (sin `localStorage`, sin cookies, sin servidor), no hay `fetch`, API,
-scraping ni IA real, y no se publica automáticamente en ningún otro lado.
+el fragmento `#hash` (codificados localmente). No se guarda nada (sin `localStorage`,
+sin cookies, sin servidor), no hay `fetch`, API, scraping ni IA real, y no se publica
+automáticamente en ningún otro lado.
 
 > ⚠️ **El link de demo incluye los textos editados dentro de la URL. No cargues
 > datos reales, privados o sensibles.** Demo pública con datos ficticios — no usar

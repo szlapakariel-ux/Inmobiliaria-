@@ -282,29 +282,35 @@
           aria-label="Texto comercial exportable (seleccionable para copiar manualmente)"></textarea>
       </div>
 
-      <!-- MC-INMO-5K: Generar link para cliente (hash local, sin backend) -->
+      <!-- MC-INMO-5K/5L: Generar link para cliente (hash local, sin backend) -->
       <div class="export card client-gen" aria-labelledby="client-gen-title">
         <h3 id="client-gen-title" class="editor-title">Generar link para cliente</h3>
         <div class="sim-notice" role="note">
-          <strong>Link de demo local.</strong> Los textos editados viajan dentro de la
-          propia URL (en el #hash). No hay backend, base de datos ni guardado.
+          <strong>Link de demo local.</strong> Los textos viajan dentro de la propia
+          URL (en el #hash). Sin backend, base de datos ni guardado.
         </div>
-        <p class="field-note field-note--warn">
-          Este link de demo incluye los textos editados dentro de la URL. No cargues
-          datos reales, privados o sensibles. Demo pública con datos ficticios — no usar comercialmente.
-        </p>
 
-        <div class="export-actions">
+        <div class="export-actions client-actions">
           <button id="generate-client-link" class="btn-primary btn-apply" type="button">Generar link para cliente</button>
           <button id="copy-client-link" class="btn-restore" type="button">Copiar link</button>
+          <button id="share-client-link" class="btn-restore" type="button" hidden>Compartir link</button>
           <button id="open-client-link" class="btn-restore" type="button">Abrir vista cliente</button>
         </div>
 
         <p id="client-link-status" class="export-status" role="status" hidden></p>
 
-        <label class="edit-label" for="client-link-text">Link para cliente (seleccionable)</label>
-        <textarea id="client-link-text" class="edit-field export-text" rows="3" readonly
-          aria-label="Link de demo para el cliente (seleccionable para copiar manualmente)"></textarea>
+        <p class="field-note field-note--warn client-warn">
+          Este link contiene datos de demo dentro de la URL. No cargues datos reales,
+          privados o sensibles.
+        </p>
+
+        <!-- La URL completa queda en segundo plano, colapsada (bajo protagonismo). -->
+        <details class="client-link-details">
+          <summary>Ver link completo</summary>
+          <label class="edit-label" for="client-link-text">Link para cliente (seleccionable)</label>
+          <textarea id="client-link-text" class="edit-field export-text" rows="3" readonly
+            aria-label="Link de demo para el cliente (seleccionable para copiar manualmente)"></textarea>
+        </details>
       </div>
 
       <!-- Cierre: frase madre como conclusión -->
