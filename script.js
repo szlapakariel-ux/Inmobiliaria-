@@ -328,6 +328,8 @@
   // En modo cliente se ocultan todos los paneles internos de la vista Guadalupe.
   function showClientMode() {
     document.body.classList.add("mode-client");
+    // 5O: fallback para navegadores sin :has() — hide chrome global.
+    document.body.classList.add("mode-client-audaz");
     var hide = document.querySelectorAll(".concept, .moment, #process-section, #offer-section");
     Array.prototype.forEach.call(hide, function (el) { el.hidden = true; });
     if (clientView) { clientView.hidden = false; }

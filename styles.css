@@ -1089,3 +1089,45 @@ body.mode-client .site-footer { margin-top: 24px; }
 body.mode-client .client-view--audaz .diffs { grid-template-columns: repeat(2, 1fr); }
 body.mode-client .client-view--audaz .contact-box--audaz { flex-wrap: nowrap; }
 body.mode-client main:has(.client-view--audaz) { padding: 0; max-width: 100%; }
+
+/* MC-INMO-5O — En modo cliente, el header global y el chrome del sitio
+   no deben enmarcar la pieza: la propuesta vive en su propia card. */
+body.mode-client:has(.client-view--audaz) .brand-band,
+body.mode-client:has(.client-view--audaz) .site-header,
+body.mode-client:has(.client-view--audaz) .site-footer {
+  display: none;
+}
+body.mode-client:has(.client-view--audaz) main {
+  padding: 0;
+  max-width: 100%;
+  margin: 0;
+}
+body.mode-client:has(.client-view--audaz) .client-view--audaz {
+  padding: 16px 12px 32px;
+}
+@media (min-width: 720px) {
+  body.mode-client:has(.client-view--audaz) .client-view--audaz {
+    padding: 28px 24px 40px;
+  }
+}
+
+/* Fallback para navegadores sin :has(): aplicar las mismas reglas vía
+   clase explícita que el script añade en modo cliente. */
+body.mode-client-audaz .brand-band,
+body.mode-client-audaz .site-header,
+body.mode-client-audaz .site-footer {
+  display: none;
+}
+body.mode-client-audaz main {
+  padding: 0;
+  max-width: 100%;
+  margin: 0;
+}
+body.mode-client-audaz .client-view--audaz {
+  padding: 16px 12px 32px;
+}
+@media (min-width: 720px) {
+  body.mode-client-audaz .client-view--audaz {
+    padding: 28px 24px 40px;
+  }
+}
