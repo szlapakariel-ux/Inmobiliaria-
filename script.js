@@ -184,7 +184,7 @@
       .filter(function (d) { return d !== ""; });
 
     var L = [];
-    L.push("DEMO — datos ficticios, no publicar.");
+    L.push("DEMO PÚBLICA — datos ficticios — no usar comercialmente.");
     L.push("");
     L.push(txt(offerFields.title));
     L.push([op, zone].filter(Boolean).join(" · "));
@@ -203,7 +203,7 @@
     L.push("Contacto (demo): " + txt(offerFields.cta) + " — placeholder, sin número real.");
     L.push("Oferta presentada por Guadalupe Cabrera · RE/MAX Buró.");
     L.push("");
-    L.push("DEMO — datos ficticios, no publicar.");
+    L.push("DEMO PÚBLICA — datos ficticios — no usar comercialmente.");
     return L.join("\n");
   }
   function setExportStatus(message) {
