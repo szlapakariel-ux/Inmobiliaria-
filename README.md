@@ -12,6 +12,19 @@ mediante estados simulados, en una oferta profesional con la identidad de
 
 ---
 
+## Demo pública
+
+> **DEMO PÚBLICA — DATOS FICTICIOS — NO USAR COMERCIALMENTE.**
+
+URL pública (GitHub Pages): **https://szlapakariel-ux.github.io/Inmobiliaria-/**
+
+Es una **demostración de concepto pública y no comercial**. No es un producto
+final ni una oferta inmobiliaria real. Usa datos ficticios. Sitio estático
+servido por GitHub Pages desde `main` (carpeta raíz), **sin Railway, sin backend
+y sin build**.
+
+---
+
 ## Propósito
 
 Mostrar de forma visual y controlada el concepto del producto: tomar un link
@@ -41,8 +54,9 @@ genérico (como texto) y simular el flujo.
 - Si el texto no parece un link, pide *"Para esta demo, ingresá un link de ejemplo."*
 - La oferta final **siempre usa los datos ficticios** ya definidos: no cambia por
   el link ingresado.
-- Podés pegar incluso un **link real de un portal** (ej. ZonaProp): se usa solo
-  como texto de entrada. La demo **no consulta la publicación** ni copia su contenido.
+- Podés pegar **cualquier link como texto** para probar el flujo. Se usa solo como
+  entrada visual: la demo **no consulta la publicación**, no lee enlaces ni copia
+  contenido de ningún portal.
 
 ### Edición local del texto comercial
 
@@ -62,7 +76,7 @@ Bajo la oferta, el bloque "Exportar oferta editada" arma un texto comercial con
 los datos visibles/editados:
 
 - **"Generar texto comercial"** crea el texto en un recuadro seleccionable
-  (incluye el aviso *"DEMO — datos ficticios, no publicar."*).
+  (incluye el aviso *"DEMO PÚBLICA — datos ficticios — no usar comercialmente."*).
 - **"Copiar texto"** intenta copiar al portapapeles; si el navegador no lo
   permite, el recuadro queda seleccionable para copiar manualmente (Ctrl/Cmd+C).
 - **"Ver versión para imprimir"** abre el diálogo de impresión nativo del
@@ -76,14 +90,14 @@ real, no hay backend, scraping, IA real ni guardado. Todo es local y manual.
 Esta demo:
 
 - Usa **datos ficticios** (ver `docs/demo-scope.md`).
-- **No es producción.**
-- **No usa Railway.**
-- **No tiene deploy** de ningún tipo.
+- Es una **demo pública no comercial** — **no es producción** ni un producto final.
+- Se publica **solo como sitio estático en GitHub Pages** (`main`, raíz). **No usa Railway.**
 - **No hace scraping** de portales ni de ningún sitio.
 - **No tiene backend** (es 100% estática: HTML/CSS/JS).
 - **No usa datos reales** de propiedades, personas ni portales.
 - **No usa imágenes de terceros** — las galerías son placeholders en HTML/CSS.
-- **No hace fetch, no llama APIs, no abre el link ficticio.**
+- **No usa IA real** — los textos los escribe el usuario.
+- **No hace fetch, no llama APIs, no abre el link ingresado.**
 - **No captura leads** ni envía mensajes: el CTA de WhatsApp es un placeholder sin acción real.
 
 ## Stack
@@ -106,4 +120,4 @@ Sin frameworks, sin dependencias externas, sin base de datos, sin build.
 
 ---
 
-Demo MC-INMO-5A — datos ficticios, no publicar.
+Demo pública — datos ficticios — no usar comercialmente.
