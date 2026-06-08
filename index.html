@@ -9,205 +9,211 @@
 </head>
 <body>
 
-  <!-- ── Aviso global de demo (G1-C: más visible) ─────────────────── -->
-  <div class="demo-banner" role="alert">
-    <strong>⚠ DEMO TÉCNICA</strong> — datos ficticios · no publicar · no consulta internet · no scraping · no publica nada
+  <!-- ── E: Banda RE/MAX/Buró recreada por CSS (sin isologotipo) ────── -->
+  <div class="brand-band" aria-hidden="true">
+    <span class="band-red"></span><span class="band-white"></span><span class="band-blue"></span>
   </div>
 
-  <!-- ── Header con identidad de Guadalupe ─────────────────────────── -->
+  <!-- ── Header con identidad de Guadalupe + badge DEMO ─────────────── -->
   <header class="site-header">
     <div class="brand">
       <div class="brand-avatar" aria-hidden="true">GC</div>
       <div class="brand-text">
         <strong class="brand-name">Guadalupe Cabrera</strong>
-        <span class="brand-role">Asesora inmobiliaria</span>
+        <span class="brand-role">Agente inmobiliaria · <span class="brand-remax">RE/MAX Buró</span></span>
       </div>
     </div>
-    <p class="brand-claim">De link genérico a oferta profesional con tu sello.</p>
+    <span class="demo-badge" role="alert">● DEMO · DATOS FICTICIOS · NO PUBLICAR</span>
   </header>
 
   <main>
 
-    <!-- ── G1-B: Bloque Antes / Después ──────────────────────────────── -->
-    <section class="card before-after" aria-label="Qué cambia con esta herramienta">
-      <div class="ba-col ba-before">
-        <span class="ba-label">Antes</span>
-        <p class="ba-text">Un link genérico de portal, igual al de cualquier otra publicación. Difícil de diferenciar.</p>
-        <div class="ba-example">
-          <span class="ba-link-icon" aria-hidden="true">🔗</span>
-          <code class="ba-link-code">portal-ejemplo.com/prop-45231</code>
-        </div>
-      </div>
-      <div class="ba-arrow" aria-hidden="true">→</div>
-      <div class="ba-col ba-after">
-        <span class="ba-label ba-label--after">Después</span>
-        <p class="ba-text">Una oferta profesional, clara y con el sello de Guadalupe. Tu voz, tu presentación.</p>
-        <div class="ba-example ba-example--after">
-          <span class="ba-gc-badge" aria-hidden="true">GC</span>
-          <span class="ba-after-tag">Oferta con sello propio</span>
-        </div>
-      </div>
+    <!-- ── B: Bloque de concepto (jerarquía editorial) ───────────────── -->
+    <section class="concept">
+      <p class="eyebrow">— El concepto</p>
+      <h1 class="concept-title">
+        De un link genérico a una <span class="hl-red">oferta profesional</span> con <span class="hl-blue">tu sello</span>.
+      </h1>
+      <p class="concept-sub">
+        Pegás el link de cualquier publicación y, en segundos, lo convertís en una
+        propuesta clara, ordenada y con tu identidad — lista para enviar, con tu
+        contacto y tu acompañamiento.
+      </p>
     </section>
 
-    <!-- ── Bloque de entrada: pegá el link ───────────────────────────── -->
-    <section class="card input-section" aria-labelledby="input-title">
-      <h1 id="input-title" class="section-title">Pegá el link de la publicación</h1>
-      <p class="section-sub">
-        Tomamos una publicación genérica y la transformamos en una oferta profesional
-        con el sello de Guadalupe.
-      </p>
-
-      <!-- G1-C: aviso de link ficticio con mayor visibilidad -->
-      <div class="sim-notice" role="note">
-        <strong>Link ficticio de ejemplo</strong> — no se abre, no se descarga ni se consulta.
-        La transformación es 100% simulada localmente.
+    <!-- ── A + C: Momento ① — Link recibido ──────────────────────────── -->
+    <section class="moment card" aria-labelledby="m1-title">
+      <div class="moment-head">
+        <span class="moment-num">1</span>
+        <h2 id="m1-title" class="moment-title">Link recibido</h2>
       </div>
 
-      <label class="field-label" for="link-input">Link de la publicación (demo)</label>
-      <div class="input-row">
+      <div class="sim-notice" role="note">
+        <strong>Link ficticio de ejemplo</strong> — no se abre, no se descarga ni se consulta.
+        La transformación es 100&nbsp;% simulada localmente.
+      </div>
+
+      <!-- Campo estilo navegador con link ficticio -->
+      <div class="browser-field">
+        <span class="browser-dots" aria-hidden="true"><i></i><i></i><i></i></span>
         <input
           id="link-input"
           class="link-input"
           type="text"
           readonly
           value="https://portal-ejemplo.invalid/propiedad-demo-123"
-          aria-describedby="link-note"
+          aria-label="Link de la publicación (demo, ficticio)"
         />
       </div>
-      <p id="link-note" class="field-note">
-        Dominio <code>.invalid</code> — no navegable por diseño (RFC 2606).
-      </p>
+      <p class="field-note">Ficha de portal genérica, sin tu marca, igual a las demás · dominio <code>.invalid</code> no navegable.</p>
 
       <button id="transform-btn" class="btn-primary" type="button">
         Transformar en oferta profesional
       </button>
     </section>
 
-    <!-- ── Estados simulados de transformación ───────────────────────── -->
-    <section id="process-section" class="card process-section" hidden aria-labelledby="process-title">
-      <h2 id="process-title" class="section-title">Transformando…</h2>
+    <!-- ── A + C: Momento ② — Transformación simulada ────────────────── -->
+    <section id="process-section" class="moment card" hidden aria-labelledby="m2-title">
+      <div class="moment-head">
+        <span class="moment-num">2</span>
+        <h2 id="m2-title" class="moment-title">Transformación simulada</h2>
+      </div>
 
-      <!-- G1-C: aviso de simulación con mayor visibilidad -->
       <div class="sim-notice" role="note">
         <strong>Simulación local</strong> — no hay internet, scraping, fetch, APIs ni datos reales.
-        Todo el proceso ocurre en tu dispositivo.
+        Todo ocurre en tu dispositivo.
       </div>
 
       <ul class="steps" id="steps-list">
         <li class="step" data-step="1">
           <span class="step-icon" aria-hidden="true"></span>
-          <span class="step-label">Datos detectados</span>
+          <span class="step-label">Datos detectados <span class="step-sub">— precio, ambientes, m²</span></span>
         </li>
         <li class="step" data-step="2">
           <span class="step-icon" aria-hidden="true"></span>
-          <span class="step-label">Información ordenada</span>
+          <span class="step-label">Información ordenada <span class="step-sub">y jerarquizada</span></span>
         </li>
         <li class="step" data-step="3">
           <span class="step-icon" aria-hidden="true"></span>
-          <span class="step-label">Texto comercial generado</span>
+          <span class="step-label">Texto comercial generado <span class="step-sub">y editable</span></span>
         </li>
         <li class="step" data-step="4">
           <span class="step-icon" aria-hidden="true"></span>
-          <span class="step-label">Oferta lista con sello de Guadalupe</span>
+          <span class="step-label">Oferta lista <span class="step-sub">con el sello de Guadalupe</span></span>
         </li>
       </ul>
     </section>
 
-    <!-- ── Oferta profesional (resultado de la transformación) ────────── -->
-    <section id="offer-section" class="offer-section" hidden aria-labelledby="offer-title">
+    <!-- ── A + C + D: Momento ③ — Oferta con sello de Guadalupe ───────── -->
+    <section id="offer-section" class="moment-offer" hidden aria-labelledby="m3-title">
+      <div class="moment-head moment-head--center">
+        <span class="moment-num">3</span>
+        <h2 id="m3-title" class="moment-title">Tu oferta profesional con sello de Guadalupe</h2>
+      </div>
+      <p class="moment-sub">La misma propiedad, presentada como una pieza propia de Guadalupe.</p>
 
+      <!-- Card mobile de oferta -->
       <div class="offer-card">
 
-        <div class="offer-flag">DEMO — datos ficticios, no publicar</div>
+        <!-- Encabezado de la pieza con Guadalupe -->
+        <div class="offer-topbar">
+          <div class="offer-brand">
+            <span class="offer-avatar" aria-hidden="true">GC</span>
+            <span class="offer-brand-text">
+              <strong>Guadalupe Cabrera</strong>
+              <span>Agente · <span class="brand-remax">RE/MAX Buró</span></span>
+            </span>
+          </div>
+        </div>
 
         <!-- Galería placeholder (sin imágenes reales) -->
         <div class="gallery" aria-label="Galería de la propiedad (placeholder)">
           <div class="gallery-main placeholder-img">
-            <span class="placeholder-tag">Foto principal (placeholder)</span>
+            <span class="placeholder-tag">Foto del inmueble (placeholder)</span>
           </div>
           <div class="gallery-thumbs">
-            <div class="placeholder-img thumb"><span class="placeholder-tag">Living</span></div>
-            <div class="placeholder-img thumb"><span class="placeholder-tag">Balcón</span></div>
-            <div class="placeholder-img thumb"><span class="placeholder-tag">Cocina</span></div>
+            <div class="placeholder-img thumb"><span class="placeholder-tag">+</span></div>
+            <div class="placeholder-img thumb"><span class="placeholder-tag">+</span></div>
+            <div class="placeholder-img thumb"><span class="placeholder-tag">+</span></div>
           </div>
         </div>
 
-        <!-- G1-D: encabezado de oferta compacto -->
-        <div class="offer-head">
-          <span class="offer-op">Venta</span>
-          <h2 id="offer-title" class="offer-title">Departamento 2 ambientes con balcón en Palermo</h2>
-          <p class="offer-zone">Palermo, CABA</p>
-          <p class="offer-price">USD 118.000 <span class="offer-price-note">+ Expensas ARS 95.000</span></p>
-        </div>
+        <div class="offer-body">
+          <!-- Tags -->
+          <div class="offer-tags">
+            <span class="tag tag--op">Venta · USD 118.000</span>
+            <span class="tag tag--zone">Palermo, CABA</span>
+          </div>
 
-        <!-- G1-D: datos clave — 2 columnas en mobile, compacto -->
-        <div class="specs">
-          <div class="spec"><span class="spec-val">2</span><span class="spec-key">Ambientes</span></div>
-          <div class="spec"><span class="spec-val">1</span><span class="spec-key">Dormitorio</span></div>
-          <div class="spec"><span class="spec-val">1</span><span class="spec-key">Baño</span></div>
-          <div class="spec"><span class="spec-val">48 m²</span><span class="spec-key">Total</span></div>
-          <div class="spec"><span class="spec-val">42 m²</span><span class="spec-key">Cubierta</span></div>
-          <div class="spec"><span class="spec-val">Apto crédito</span><span class="spec-key">Financiación</span></div>
-        </div>
+          <!-- Título serif + precio -->
+          <h3 id="offer-title" class="offer-title">Departamento 2 ambientes con balcón en Palermo</h3>
+          <p class="offer-price">USD 118.000 <span class="offer-price-note">precio de referencia</span></p>
+          <p class="offer-loc">📍 Palermo, Ciudad Autónoma de Buenos Aires</p>
 
-        <!-- G1-D: descripción simplificada -->
-        <div class="offer-block">
-          <h3 class="block-title">La propiedad</h3>
-          <p class="offer-desc">
-            Luminoso 2 ambientes en Palermo, con balcón al frente y buena distribución.
-            Edificio cuidado, cerca de transporte y espacios verdes. Estado muy bueno,
-            listo para mudarse o invertir.
+          <!-- Datos clave -->
+          <div class="specs">
+            <div class="spec"><span class="spec-val">2</span><span class="spec-key">ambientes</span></div>
+            <div class="spec"><span class="spec-val">48 m²</span><span class="spec-key">superficie</span></div>
+            <div class="spec"><span class="spec-val">1</span><span class="spec-key">baño</span></div>
+          </div>
+
+          <!-- Descripción -->
+          <div class="offer-section-block">
+            <p class="block-eyebrow">Descripción</p>
+            <p class="offer-desc">
+              Una propuesta clara, luminosa y funcional para quienes buscan vivir cerca
+              de todo. Balcón con buena orientación, distribución aprovechada y una zona
+              muy conectada. Presentada de forma profesional y con acompañamiento personalizado.
+            </p>
+            <span class="mini-tag">texto comercial generado</span>
+          </div>
+
+          <!-- Diferenciales -->
+          <div class="offer-section-block">
+            <p class="block-eyebrow">Diferenciales</p>
+            <ul class="diffs">
+              <li>Balcón luminoso</li>
+              <li>Buena distribución</li>
+              <li>Zona conectada</li>
+              <li>1ª vivienda o inversión</li>
+            </ul>
+          </div>
+
+          <!-- CTA placeholder WhatsApp -->
+          <a href="#contacto" class="btn-whatsapp" id="cta-whatsapp">💬 Consultar por WhatsApp</a>
+          <p class="field-note field-note--center">CTA placeholder — sin número real, sin envío automático.</p>
+
+          <!-- Bloque de confianza -->
+          <div class="trust-box">
+            <span class="trust-icon" aria-hidden="true">✓</span>
+            <p><strong>Guadalupe te acompaña</strong> en todo el proceso: desde la consulta inicial hasta la visita.</p>
+          </div>
+
+          <!-- Contacto -->
+          <div class="contact-box" id="contacto">
+            <div class="contact-actions" aria-hidden="true">
+              <span class="contact-dot">✆</span><span class="contact-dot">☎</span><span class="contact-dot">✉</span>
+            </div>
+            <div class="contact-id">
+              <strong>Guadalupe Cabrera</strong>
+              <span class="brand-remax">RE/MAX Buró</span>
+            </div>
+          </div>
+
+          <!-- F: Bloque legal / matrícula — placeholder, sin datos inventados -->
+          <p class="legal-placeholder">
+            Datos legales / matrícula: pendiente de carga autorizada.
           </p>
         </div>
 
-        <!-- Diferenciales -->
-        <div class="offer-block">
-          <h3 class="block-title">Diferenciales</h3>
-          <ul class="diffs">
-            <li>Balcón orientado al frente</li>
-            <li>Apto crédito hipotecario</li>
-            <li>Palermo, a metros de todo</li>
-            <li>Estado muy bueno — listo para entrar</li>
-          </ul>
-        </div>
+        <!-- Aviso DEMO al pie de la pieza -->
+        <div class="offer-foot-flag">DEMO — DATOS FICTICIOS — NO PUBLICAR</div>
+      </div>
 
-        <!-- CTA WhatsApp placeholder -->
-        <div class="offer-cta">
-          <a href="#contacto" class="btn-whatsapp" id="cta-whatsapp">Consultar por WhatsApp</a>
-          <p class="field-note">CTA placeholder — sin número real, sin envío automático.</p>
-        </div>
-
-        <!-- Bloque: Guadalupe te acompaña -->
-        <div class="offer-block accent-block" id="contacto">
-          <h3 class="block-title">Guadalupe te acompaña</h3>
-          <p>
-            No es una ficha de portal: es una oferta presentada por <strong>Guadalupe Cabrera</strong>.
-            Organizo la información y la presento de forma clara para que tu propiedad se destaque.
-          </p>
-        </div>
-
-        <!-- Bloque para propietarios -->
-        <div class="offer-block owner-block">
-          <h3 class="block-title">¿Sos propietario/a?</h3>
-          <p>
-            Convierto el link de tu publicación en una oferta profesional con tu identidad.
-            Más presencia, mejor comunicación, más confianza.
-          </p>
-        </div>
-
-        <!-- G1-A: frase madre en el cierre (conclusión del recorrido) -->
-        <div class="offer-block closing-claim">
-          <p class="closing-text">
-            De link genérico a oferta profesional con tu sello.
-          </p>
-          <p class="closing-sub">Eso es exactamente lo que acabas de ver.</p>
-        </div>
-
-        <p class="validation-note">
-          Aviso: información de demostración con datos ficticios. No es una publicación comercial activa.
-          Los valores, medidas y condiciones deben validarse antes de cualquier uso real.
-        </p>
-
+      <!-- Cierre: frase madre como conclusión -->
+      <div class="closing-claim">
+        <p class="closing-text">De link genérico a oferta profesional con tu sello.</p>
+        <p class="closing-sub">Eso es exactamente lo que acabás de ver.</p>
       </div>
     </section>
 
@@ -215,8 +221,12 @@
 
   <!-- Footer -->
   <footer class="site-footer">
-    <p>Guadalupe Cabrera — Asesora inmobiliaria · Demo técnica MC-INMO-5C</p>
-    <p class="footer-note">Datos ficticios. No es producción. Sin deploy, sin backend, sin datos reales. Sin imágenes de terceros.</p>
+    <p>Pieza de presentación — demo. Datos ficticios con fines de demostración. No constituye una oferta comercial activa ni una publicación.</p>
+    <p class="footer-note">
+      No reproduce isologotipos de terceros; las marcas mencionadas pertenecen a sus titulares.
+      Sin deploy, sin backend, sin datos reales, sin imágenes de terceros.
+    </p>
+    <p class="footer-claim">tu publicación, con tu sello</p>
   </footer>
 
   <script src="script.js"></script>
