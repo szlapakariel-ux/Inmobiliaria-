@@ -340,7 +340,16 @@
     if (!m) { return; }
     var data = decodeData(m[1]);
     if (!data) { return; }
-    fillClientView(data);
+    // 5T: mergear con los defaults de Guadalupe para que los campos
+    // ausentes en el link (cuando el usuario no editó) caigan al texto
+    // demo, en vez de quedarse vacíos en el HTML del client-view.
+    var merged = {};
+    Object.keys(CLIENT_MAP).forEach(function (k) {
+      merged[k] = Object.prototype.hasOwnProperty.call(data, k)
+        ? data[k]
+        : (offerDefaults && offerDefaults[k] ? offerDefaults[k] : "");
+    });
+    fillClientView(merged);
     showClientMode();
     window.scrollTo(0, 0);
   }
