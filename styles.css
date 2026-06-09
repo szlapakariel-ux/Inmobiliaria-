@@ -1120,3 +1120,21 @@ body.mode-client .client-view--audaz .contact-box--audaz { flex-wrap: nowrap; }
     border-radius: 22px;
   }
 }
+
+/* MC-INMO-5R — Sección 3 (oferta Guadalupe) full-width en mobile.
+   La preview de la oferta dentro del modo Guadalupe quedaba con
+   max-width 420px y aparecía angosta. En mobile, alineamos la pieza
+   al ancho útil de la pantalla para que se vea igual que la del cliente. */
+@media (max-width: 560px) {
+  body:not(.mode-client) main { padding-left: 0; padding-right: 0; }
+  body:not(.mode-client) #offer-section .offer-card,
+  body:not(.mode-client) #offer-section .editor,
+  body:not(.mode-client) #offer-section .export,
+  body:not(.mode-client) #offer-section .closing-claim {
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    border-radius: 0;
+  }
+  body:not(.mode-client) #offer-section .offer-card { border-left: none; border-right: none; }
+}
